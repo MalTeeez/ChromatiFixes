@@ -34,16 +34,35 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    implementation("com.github.GTNewHorizons:GTNHLib:0.6.33:dev") { transitive = false }
+    implementation("com.github.GTNewHorizons:GTNHLib:0.6.39:dev") { transitive = false }
 
     devOnlyNonPublishable(rfg.deobf("curse.maven:dragonapi-235591:4722480"))
-    devOnlyNonPublishable(rfg.deobf("curse.maven:cavecontrol-235605:4721202"))
     devOnlyNonPublishable(rfg.deobf("curse.maven:chromaticraft-235590:4721192"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:cavecontrol-235605:4721202"))
     devOnlyNonPublishable(rfg.deobf("curse.maven:satisforestry-430986:4721194"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:rotarycraft-235596:4721191"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:reactorcraft-235593:4721203"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:void-monster-235609:4721208"))
 
-    devOnlyNonPublishable(rfg.deobf(project.files("libs/DragonRealmCore 1.7.10 V33a.jar")))
+    compileOnly(rfg.deobf(project.files("libs/DragonRealmCore 1.7.10 V33a.jar")))
 
-    compileOnly("com.github.GTNewHorizons:CodeChickenCore:1.4.3:dev") { transitive = false }
-    compileOnly("com.github.GTNewHorizons:NotEnoughItems:2.7.60-GTNH:dev") { transitive = false }
-    compileOnly("com.github.GTNewHorizons:waila:1.8.10:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:CodeChickenCore:1.4.7:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.90-GTNH:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:waila:1.8.14:dev") { transitive = false }
+
+    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/1.7.10_AM2-1.4.0.009.jar")))
+    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/AnimationAPI-1.7.10-1.2.4.jar")))
+    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/mystcraft-1.7.10-0.12.3.04.jar")))
+    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/PneumaticCraft-1.7.10-1.12.7-152-universal.jar")))
+    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/BiomesOPlenty-1.7.10-2.1.0.2308-universal.jar")))
+    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/ProjectE-1.7.10-PE1.10.1.jar")))
+    //runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/ComputerCraft1.75.jar")))
+    runtimeOnlyNonPublishable("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") { transitive = false }
+    //runtimeOnlyNonPublishable("com.github.GTNewHorizons:OpenComputers:1.11.19-GTNH:dev") { transitive = false }
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Botania:1.12.26-GTNH:dev") { transitive = false }
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Baubles-Expanded:2.1.15-GTNH:dev") { transitive = false }
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:ForestryMC:4.10.17:dev") { transitive = false }
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:BloodMagic:1.7.51:dev") { transitive = false }
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:BuildCraft:7.1.44:dev") { transitive = false }
+    runtimeOnlyNonPublishable('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
 }

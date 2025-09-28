@@ -5,6 +5,9 @@
 /.idea/
 /.vscode/
 /run/
+
+# Need to keep fixed AM2 potion ids
+!/run/config/AM2/AM2.cfg
 /build/
 /eclipse/
 .classpath

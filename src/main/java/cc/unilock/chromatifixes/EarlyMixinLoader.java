@@ -5,6 +5,7 @@ import com.gtnewhorizon.gtnhlib.config.ConfigException;
 import com.gtnewhorizon.gtnhlib.config.ConfigurationManager;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+import net.minecraftforge.classloading.FMLForgePlugin;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -27,6 +28,7 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
+        List<String> mixins = new ArrayList<>();
         if (loadedCoreMods.contains("Reika.DragonRealmCore.DragonRealmASM")) {
             if (ChromatiFixesConfig.disableTickInterceptASM) {
                 try {
@@ -39,7 +41,7 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
                 }
             }
         }
-        return Collections.emptyList();
+        return mixins;
     }
 
     @Override
