@@ -1,18 +1,18 @@
 package cc.unilock.chromatifixes.asm.dragonapi;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.*;
 
 public class LuaMethodASM implements IClassTransformer {
 
     public LuaMethodASM() {
-        System.out.println("=== LuaMethodASM CONSTRUCTOR CALLED ===");
     }
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
         if ("Reika.DragonAPI.ModInteract.Lua.LuaMethod".equals(transformedName)) {
-            System.out.println("=== PATCHING LuaMethod to remove computer mod dependent methods ===");
+            FMLLog.getLogger().info("PATCHING LuaMethod to remove computer mod dependent methods");
             return removeComputerMethods(basicClass);
         }
         return basicClass;

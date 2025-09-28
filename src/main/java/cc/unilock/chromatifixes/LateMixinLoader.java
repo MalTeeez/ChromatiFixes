@@ -2,6 +2,8 @@ package cc.unilock.chromatifixes;
 
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
+
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
 
 import java.util.ArrayList;

@@ -3,16 +3,17 @@ package cc.unilock.chromatifixes.asm.dragonapi;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.*;
 
+import cpw.mods.fml.common.FMLLog;
+
 public class ModListASM implements IClassTransformer {
 
     public ModListASM() {
-        System.out.println("=== ModListASM CONSTRUCTOR CALLED ===");
     }
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
         if ("Reika.DragonAPI.ModList".equals(transformedName)) {
-            System.out.println("=== PATCHING ModList.isLoaded() to add debugging ===");
+            //FMLLog.getLogger().info("PATCHING ModList.isLoaded() to add debugging");
             //return addLoggingToIsLoaded(basicClass);
         }
         return basicClass;

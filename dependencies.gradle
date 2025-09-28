@@ -50,7 +50,8 @@ dependencies {
     devOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.90-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:waila:1.8.14:dev") { transitive = false }
 
-    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/1.7.10_AM2-1.4.0.009.jar")))
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/1.7.10_AM2-1.4.0.009.jar")))
+
     runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/AnimationAPI-1.7.10-1.2.4.jar")))
     runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/mystcraft-1.7.10-0.12.3.04.jar")))
     runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/PneumaticCraft-1.7.10-1.12.7-152-universal.jar")))
@@ -65,4 +66,7 @@ dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:BloodMagic:1.7.51:dev") { transitive = false }
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:BuildCraft:7.1.44:dev") { transitive = false }
     runtimeOnlyNonPublishable('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
+
+    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/MobiusCore-1.2.5_1.7.10.jar")))
+    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/Opis-1.2.5_1.7.10.jar")))
 }

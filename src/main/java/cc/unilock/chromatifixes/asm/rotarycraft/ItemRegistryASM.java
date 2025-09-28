@@ -3,16 +3,17 @@ package cc.unilock.chromatifixes.asm.rotarycraft;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.*;
 
+import cpw.mods.fml.common.FMLLog;
+
 public class ItemRegistryASM implements IClassTransformer {
 
     public ItemRegistryASM() {
-        System.out.println("=== RotaryItemsASM CONSTRUCTOR CALLED ===");
     }
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
         if ("Reika.RotaryCraft.Registry.ItemRegistry".equals(transformedName)) {
-            System.out.println("=== PATCHING ChromaItems to remove problematic enum constants ===");
+            FMLLog.getLogger().info("PATCHING ChromaItems to remove problematic enum constants");
             return removeProblematicEnumConstants(basicClass);
         }
         return basicClass;
