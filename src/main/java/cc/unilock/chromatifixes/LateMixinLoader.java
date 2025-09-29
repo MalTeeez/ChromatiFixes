@@ -1,5 +1,6 @@
 package cc.unilock.chromatifixes;
 
+import Reika.ReactorCraft.Entities.EntityNeutron;
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
 
@@ -23,6 +24,7 @@ public class LateMixinLoader implements ILateMixinLoader {
         final boolean chromaticraft = loadedMods.contains("ChromatiCraft");
         final boolean dragonapi = loadedMods.contains("DragonAPI");
         final boolean satisforestry = loadedMods.contains("Satisforestry");
+        final boolean reactorcraft = loadedMods.contains("ReactorCraft");
         final boolean dragonrealmcore = loadedMods.contains("DragonRealmCore");
 
         List<String> mixins = new ArrayList<>();
@@ -66,6 +68,9 @@ public class LateMixinLoader implements ILateMixinLoader {
             mixins.add("satisforestry.SFEventsMixin");
             mixins.add("satisforestry.TileShaftConnectionMixin");
         }
+        if (reactorcraft) {
+            mixins.add("reactorcraft.EntityTrackerEntryMixin");
+        }
         if (dragonrealmcore) {
             mixins.add("dragonrealmcore.BlockT2HexGeneratorMixin");
             mixins.add("dragonrealmcore.BlockT3HexGeneratorMixin");
@@ -78,7 +83,6 @@ public class LateMixinLoader implements ILateMixinLoader {
                 mixins.add("dragonrealmcore.EnergizationManagerMixin");
             }
         }
-
         return mixins;
     }
 }
