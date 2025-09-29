@@ -1,10 +1,8 @@
 package cc.unilock.chromatifixes;
 
-import Reika.ReactorCraft.Entities.EntityNeutron;
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
 
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
 
 import java.util.ArrayList;
@@ -57,6 +55,7 @@ public class LateMixinLoader implements ILateMixinLoader {
             mixins.add("chromaticraft.TileEntityCrystalBroadcasterMixin");
             mixins.add("chromaticraft.TileEntityLumenAlvearyEffectMixins");
             mixins.add("chromaticraft.TileEntityWirelessPoweredMixin");
+            mixins.add("chromaticraft.ShiftMazeGeneratorMixin");
         }
         if (dragonapi) {
             mixins.add("dragonapi.AbstractSearchFoundPathMixin");
