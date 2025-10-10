@@ -8,7 +8,11 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
 
 @IFMLLoadingPlugin.Name("Chromatifixes")
 @IFMLLoadingPlugin.MCVersion("1.7.10")
@@ -49,15 +53,17 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
     public String[] getASMTransformerClass() {
         List<String> transformers = new ArrayList<>();
 
-        transformers.add("cc.unilock.chromatifixes.asm.dragonapi.ModListASM");
-        transformers.add("cc.unilock.chromatifixes.asm.dragonapi.LuaMethodASM");
-        transformers.add("cc.unilock.chromatifixes.asm.chromaticraft.ChromaItemsASM");
-        transformers.add("cc.unilock.chromatifixes.asm.rotarycraft.ItemRegistryASM");
-        transformers.add("cc.unilock.chromatifixes.asm.rotarycraft.RotaryCraftTileEntityASM");
+        if (ChromatiFixesConfig.insideDevEnv) {
+            transformers.add("cc.unilock.chromatifixes.asm.dragonapi.ModListASM");
+            transformers.add("cc.unilock.chromatifixes.asm.dragonapi.LuaMethodASM");
+            transformers.add("cc.unilock.chromatifixes.asm.chromaticraft.ChromaItemsASM");
+            transformers.add("cc.unilock.chromatifixes.asm.rotarycraft.ItemRegistryASM");
+            transformers.add("cc.unilock.chromatifixes.asm.rotarycraft.RotaryCraftTileEntityASM");
 
-        if (isDragonAPIPresent() && isAM2Present()) {
-            FMLLog.getLogger().info("Both DragonAPI and AM2 detected, adding AM2BytecodeTransformersASM");
-            transformers.add("cc.unilock.chromatifixes.asm.dragonapi.AM2PreloadContainerASM");
+            if (isDragonAPIPresent() && isAM2Present()) {
+                FMLLog.getLogger().info("Both DragonAPI and AM2 detected, adding AM2BytecodeTransformersASM");
+                transformers.add("cc.unilock.chromatifixes.asm.dragonapi.AM2PreloadContainerASM");
+            }
         }
 
         return transformers.toArray(new String[0]);

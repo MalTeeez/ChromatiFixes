@@ -31,8 +31,12 @@ public class ChromatiFixesConfig {
     @Config.DefaultBoolean(true)
     @Config.RequiresMcRestart
     public static boolean energizationManagerFix;
-    
+
     @Config.Comment("Whether or not to enable fix of server crash when using bypass panel of shifting maze. Make sure to disable this if using MMNHUtils (or disable their check)")
     @Config.DefaultBoolean(value = true)
     public static boolean enableShiftMazeBypassCrashFix;
+
+    @Config.Comment("Enable heavy patches on Reikas mods to allow running inside a dev env, will break mod integration. DO NOT USE OUTSIDE OF DEV ENV.")
+    @Config.DefaultBoolean(value = false)
+    public static boolean insideDevEnv;
 }
