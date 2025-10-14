@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = EntityTrackerEntry.class, remap = false)
+@Mixin(value = EntityTrackerEntry.class)
 public class EntityTrackerEntryMixin {
 
     @Shadow
