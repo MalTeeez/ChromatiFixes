@@ -67,6 +67,10 @@ dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:BuildCraft:7.1.44:dev") { transitive = false }
     runtimeOnlyNonPublishable('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
 
-    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/MobiusCore-1.2.5_1.7.10.jar")))
-    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/Opis-1.2.5_1.7.10.jar")))
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Opis:1.4.6-mapless:dev")
+
+    //runtimeOnlyNonPublishable(rfg.deobf(files("libs/endlessids-mc1.7.10-1.6.13.jar")))
+    runtimeOnlyNonPublishable(files("libs/falsepatternlib-mc1.7.10-1.9.1-dev.jar"))
+    runtimeOnlyNonPublishable(files("libs/endlessids-mc1.7.10-1.6.13-dev.jar"))
+    runtimeOnlyNonPublishable(files("libs/chunkapi-mc1.7.10-0.7.0-alpha-01-dev.jar"))
 }

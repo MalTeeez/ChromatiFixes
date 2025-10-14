@@ -36,6 +36,10 @@ public class ChromatiFixesConfig {
     @Config.DefaultBoolean(value = true)
     public static boolean enableShiftMazeBypassCrashFix;
 
+    @Config.Comment("Allow registering potions with a higher ID than normal, only use with mods that expand the ID range, such as EndlessIDs. EXPERIMENTAL")
+    @Config.DefaultBoolean(value = false)
+    public static boolean allowHigherIDSpace;
+
     @Config.Comment("Enable heavy patches on Reikas mods to allow running inside a dev env, will break mod integration. DO NOT USE OUTSIDE OF DEV ENV.")
     @Config.DefaultBoolean(value = false)
     public static boolean insideDevEnv;

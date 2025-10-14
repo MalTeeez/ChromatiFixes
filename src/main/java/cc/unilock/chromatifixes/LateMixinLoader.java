@@ -64,6 +64,9 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (ChromatiFixesConfig.disableClientSpecificConfigs) {
                 mixins.add("dragonapi.ControlledConfigMixin");
             }
+            if (ChromatiFixesConfig.allowHigherIDSpace) {
+                mixins.add("dragonapi.IDTypeMixin");
+            }
         }
         if (satisforestry) {
             mixins.add("satisforestry.SFEventsMixin");
