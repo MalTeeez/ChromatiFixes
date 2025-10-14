@@ -50,27 +50,44 @@ dependencies {
     devOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.90-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:waila:1.8.14:dev") { transitive = false }
 
-    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/1.7.10_AM2-1.4.0.009.jar")))
+    // Optional runtime dependencies - only loaded if files exist
+    if (file("libs/1.7.10_AM2-1.4.0.009.jar").exists()) {
+        runtimeOnly(rfg.deobf(project.files("libs/1.7.10_AM2-1.4.0.009.jar")))
+    }
+    if (file("libs/AnimationAPI-1.7.10-1.2.4.jar").exists()) {
+        runtimeOnly(rfg.deobf(project.files("libs/AnimationAPI-1.7.10-1.2.4.jar")))
+    }
+    if (file("libs/mystcraft-1.7.10-0.12.3.04.jar").exists()) {
+        runtimeOnly(rfg.deobf(project.files("libs/mystcraft-1.7.10-0.12.3.04.jar")))
+    }
+    if (file("libs/PneumaticCraft-1.7.10-1.12.7-152-universal.jar").exists()) {
+        runtimeOnly(rfg.deobf(project.files("libs/PneumaticCraft-1.7.10-1.12.7-152-universal.jar")))
+    }
+    if (file("libs/BiomesOPlenty-1.7.10-2.1.0.2308-universal.jar").exists()) {
+        runtimeOnly(rfg.deobf(project.files("libs/BiomesOPlenty-1.7.10-2.1.0.2308-universal.jar")))
+    }
+    if (file("libs/ProjectE-1.7.10-PE1.10.1.jar").exists()) {
+        runtimeOnly(rfg.deobf(project.files("libs/ProjectE-1.7.10-PE1.10.1.jar")))
+    }
 
-    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/AnimationAPI-1.7.10-1.2.4.jar")))
-    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/mystcraft-1.7.10-0.12.3.04.jar")))
-    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/PneumaticCraft-1.7.10-1.12.7-152-universal.jar")))
-    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/BiomesOPlenty-1.7.10-2.1.0.2308-universal.jar")))
-    runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/ProjectE-1.7.10-PE1.10.1.jar")))
     //runtimeOnlyNonPublishable(rfg.deobf(project.files("libs/ComputerCraft1.75.jar")))
-    runtimeOnlyNonPublishable("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") { transitive = false }
     //runtimeOnlyNonPublishable("com.github.GTNewHorizons:OpenComputers:1.11.19-GTNH:dev") { transitive = false }
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Botania:1.12.26-GTNH:dev") { transitive = false }
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Baubles-Expanded:2.1.15-GTNH:dev") { transitive = false }
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:ForestryMC:4.10.17:dev") { transitive = false }
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:BloodMagic:1.7.51:dev") { transitive = false }
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:BuildCraft:7.1.44:dev") { transitive = false }
-    runtimeOnlyNonPublishable('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
+    runtimeOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") { transitive = false }
+    runtimeOnly("com.github.GTNewHorizons:Botania:1.12.26-GTNH:dev") { transitive = false }
+    runtimeOnly("com.github.GTNewHorizons:Baubles-Expanded:2.1.15-GTNH:dev") { transitive = false }
+    runtimeOnly("com.github.GTNewHorizons:ForestryMC:4.10.17:dev") { transitive = false }
+    runtimeOnly("com.github.GTNewHorizons:BloodMagic:1.7.51:dev") { transitive = false }
+    runtimeOnly("com.github.GTNewHorizons:BuildCraft:7.1.44:dev") { transitive = false }
+    runtimeOnly('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev') { transitive = false }
 
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Opis:1.4.6-mapless:dev")
+    runtimeOnly("com.github.GTNewHorizons:Opis:1.4.6-mapless:dev") { transitive = false }
 
-    //runtimeOnlyNonPublishable(rfg.deobf(files("libs/endlessids-mc1.7.10-1.6.13.jar")))
-    runtimeOnlyNonPublishable(files("libs/falsepatternlib-mc1.7.10-1.9.1-dev.jar"))
-    runtimeOnlyNonPublishable(files("libs/endlessids-mc1.7.10-1.6.13-dev.jar"))
-    runtimeOnlyNonPublishable(files("libs/chunkapi-mc1.7.10-0.7.0-alpha-01-dev.jar"))
+    if (file("libs/falsepatternlib-mc1.7.10-1.9.1-dev.jar").exists() 
+      && file("libs/endlessids-mc1.7.10-1.6.13-dev.jar").exists() 
+      && file("libs/chunkapi-mc1.7.10-0.7.0-alpha-01-dev.jar").exists()) {
+        runtimeOnly(files("libs/falsepatternlib-mc1.7.10-1.9.1-dev.jar"))
+        runtimeOnly(files("libs/endlessids-mc1.7.10-1.6.13-dev.jar"))
+        runtimeOnly(files("libs/chunkapi-mc1.7.10-0.7.0-alpha-01-dev.jar"))
+    }
+
 }
