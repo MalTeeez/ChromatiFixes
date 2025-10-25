@@ -4,7 +4,6 @@ import Reika.DragonAPI.Libraries.Java.ReikaJVMParser;
 import com.gtnewhorizon.gtnhlib.config.ConfigException;
 import com.gtnewhorizon.gtnhlib.config.ConfigurationManager;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
 import java.lang.reflect.Field;
@@ -34,17 +33,34 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
         List<String> mixins = new ArrayList<>();
-        if (loadedCoreMods.contains("Reika.DragonRealmCore.DragonRealmASM")) {
-            if (ChromatiFixesConfig.disableTickInterceptASM) {
-                try {
-                    Field argsField = ReikaJVMParser.class.getDeclaredField("args");
-                    argsField.setAccessible(true);
-                    HashSet<String> args = (HashSet<String>) argsField.get(null);
-                    args.add("-DragonAPI_disable_ASM_TICKINTERCEPT");
-                } catch (Throwable e) {
-                    throw new RuntimeException(e);
+
+        // Disable Reikas ASMs here
+        try {
+            Field argsField = ReikaJVMParser.class.getDeclaredField("args");
+            argsField.setAccessible(true);
+            HashSet<String> args = (HashSet<String>) argsField.get(null);
+            if (loadedCoreMods.contains("Reika.DragonAPI.Auxiliary.DragonAPIASMHandler")) {
+                if (ChromatiFixesConfig.insideDevEnv) {
+                    args.add("-DragonAPI_ForceMethodStrip");
+                    args.add("-DragonAPI_disable_ASM_ENDERLOOKAGGROEVENT");
                 }
             }
+            if (loadedCoreMods.contains("Reika.RotaryCraft.Auxiliary.RotaryASMHandler")) {
+
+            }
+            if (loadedCoreMods.contains("Reika.ChromatiCraft.Auxiliary.ChromaASMHandler")) {
+
+            }
+
+            if (loadedCoreMods.contains("Reika.DragonRealmCore.DragonRealmASM")) {
+                if (ChromatiFixesConfig.disableTickInterceptASM) {
+                    args.add("-DragonAPI_disable_ASM_TICKINTERCEPT");
+                }
+            }
+
+
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
         }
         return mixins;
     }
@@ -54,16 +70,16 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
         List<String> transformers = new ArrayList<>();
 
         if (ChromatiFixesConfig.insideDevEnv) {
-            transformers.add("cc.unilock.chromatifixes.asm.dragonapi.ModListASM");
-            transformers.add("cc.unilock.chromatifixes.asm.dragonapi.LuaMethodASM");
+//            transformers.add("cc.unilock.chromatifixes.asm.dragonapi.ModListASM");
+//            transformers.add("cc.unilock.chromatifixes.asm.dragonapi.LuaMethodASM");
             transformers.add("cc.unilock.chromatifixes.asm.chromaticraft.ChromaItemsASM");
             transformers.add("cc.unilock.chromatifixes.asm.rotarycraft.ItemRegistryASM");
-            transformers.add("cc.unilock.chromatifixes.asm.rotarycraft.RotaryCraftTileEntityASM");
-
-            if (isDragonAPIPresent() && isAM2Present()) {
-                FMLLog.getLogger().info("Both DragonAPI and AM2 detected, adding AM2BytecodeTransformersASM");
-                transformers.add("cc.unilock.chromatifixes.asm.dragonapi.AM2PreloadContainerASM");
-            }
+//            transformers.add("cc.unilock.chromatifixes.asm.rotarycraft.RotaryCraftTileEntityASM");
+//
+//            if (isDragonAPIPresent() && isAM2Present()) {
+//                FMLLog.getLogger().info("Both DragonAPI and AM2 detected, adding AM2BytecodeTransformersASM");
+//                transformers.add("cc.unilock.chromatifixes.asm.dragonapi.AM2PreloadContainerASM");
+//            }
         }
 
         return transformers.toArray(new String[0]);
