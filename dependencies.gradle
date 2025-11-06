@@ -43,6 +43,7 @@ dependencies {
     devOnlyNonPublishable(rfg.deobf("curse.maven:rotarycraft-235596:4721191"))
     devOnlyNonPublishable(rfg.deobf("curse.maven:reactorcraft-235593:4721203"))
     devOnlyNonPublishable(rfg.deobf("curse.maven:void-monster-235609:4721208"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:geostrata-235601:4721200"))
 
     compileOnly(rfg.deobf(project.files("libs/DragonRealmCore 1.7.10 V33a.jar")))
 
@@ -50,6 +51,7 @@ dependencies {
     devOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.90-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:waila:1.8.14:dev") { transitive = false }
 
+    runtimeOnly("com.github.GTNewHorizons:Angelica:1.0.0-beta66:dev")
     // Reika mods required for dev env
             // Optional runtime dependencies - only loaded if files exist
             //if (file("libs/1.7.10_AM2-1.4.0.009.jar").exists()) {

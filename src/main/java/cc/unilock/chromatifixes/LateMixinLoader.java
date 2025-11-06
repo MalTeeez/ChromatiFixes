@@ -58,6 +58,7 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (ChromatiFixesConfig.enableShiftMazeBypassCrashFix) {
                 mixins.add("chromaticraft.ShiftMazeGeneratorMixin");
             }
+            mixins.add("chromaticraft.BlockDecoFlowerMixin");
         }
         if (dragonapi) {
             mixins.add("dragonapi.AbstractSearchFoundPathMixin");
