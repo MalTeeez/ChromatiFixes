@@ -9,7 +9,13 @@ import org.apache.logging.log4j.Logger;
     version = Tags.VERSION, name = "ChromatiFixes",
     acceptedMinecraftVersions = "[1.7.10]",
     acceptableRemoteVersions = "*",
-    dependencies = "after:DragonAPI;"+"after:CaveControl;"+"after:ChromatiCraft;"+"after:DragonRealmCore;"+"after:gtnhlib;"
+    dependencies = "after:DragonAPI;"
+        +"after:CaveControl;"
+        +"after:ChromatiCraft;"
+        +"after:ReactorCraft;"
+        +"after:RotaryCraft;"
+        +"after:DragonRealmCore;"
+        +"required-after:gtnhlib;"
 )
 public class ChromatiFixes {
     public static final String MOD_ID = "chromatifixes";

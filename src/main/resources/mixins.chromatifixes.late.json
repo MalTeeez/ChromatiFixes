@@ -4,5 +4,8 @@
   "package": "cc.unilock.chromatifixes.mixin.late",
   "refmap": "mixins.chromatifixes.refmap.json",
   "target": "@env(DEFAULT)",
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  },
   "compatibilityLevel": "JAVA_8"
 }

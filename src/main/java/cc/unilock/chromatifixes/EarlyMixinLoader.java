@@ -1,6 +1,9 @@
 package cc.unilock.chromatifixes;
 
 import Reika.DragonAPI.Libraries.Java.ReikaJVMParser;
+import Reika.DragonAPI.ModInteract.LegacyWailaHelper;
+import Reika.ReactorCraft.Blocks.BlockReactorTile;
+import Reika.RotaryCraft.Base.BlockBasicMachine;
 import com.gtnewhorizon.gtnhlib.config.ConfigException;
 import com.gtnewhorizon.gtnhlib.config.ConfigurationManager;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
@@ -35,32 +38,33 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
         List<String> mixins = new ArrayList<>();
 
         // Disable Reikas ASMs here
-        try {
-            Field argsField = ReikaJVMParser.class.getDeclaredField("args");
-            argsField.setAccessible(true);
-            HashSet<String> args = (HashSet<String>) argsField.get(null);
-            if (loadedCoreMods.contains("Reika.DragonAPI.Auxiliary.DragonAPIASMHandler")) {
+        if (loadedCoreMods.contains("Reika.DragonAPI.Auxiliary.DragonAPIASMHandler")) {
+            try {
+                Field argsField = ReikaJVMParser.class.getDeclaredField("args");
+                argsField.setAccessible(true);
+                HashSet<String> args = (HashSet<String>) argsField.get(null);
                 if (ChromatiFixesConfig.insideDevEnv) {
                     args.add("-DragonAPI_ForceMethodStrip");
                     args.add("-DragonAPI_disable_ASM_ENDERLOOKAGGROEVENT");
                 }
-            }
-            if (loadedCoreMods.contains("Reika.RotaryCraft.Auxiliary.RotaryASMHandler")) {
 
-            }
-            if (loadedCoreMods.contains("Reika.ChromatiCraft.Auxiliary.ChromaASMHandler")) {
+                if (loadedCoreMods.contains("Reika.RotaryCraft.Auxiliary.RotaryASMHandler")) {
 
-            }
-
-            if (loadedCoreMods.contains("Reika.DragonRealmCore.DragonRealmASM")) {
-                if (ChromatiFixesConfig.disableTickInterceptASM) {
-                    args.add("-DragonAPI_disable_ASM_TICKINTERCEPT");
                 }
+                if (loadedCoreMods.contains("Reika.ChromatiCraft.Auxiliary.ChromaASMHandler")) {
+
+                }
+
+                if (loadedCoreMods.contains("Reika.DragonRealmCore.DragonRealmASM")) {
+                    if (ChromatiFixesConfig.disableTickInterceptASM) {
+                        args.add("-DragonAPI_disable_ASM_TICKINTERCEPT");
+                    }
+                }
+
+
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
             }
-
-
-        } catch (Throwable e) {
-            throw new RuntimeException(e);
         }
         return mixins;
     }

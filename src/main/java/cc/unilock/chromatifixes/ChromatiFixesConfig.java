@@ -43,4 +43,8 @@ public class ChromatiFixesConfig {
     @Config.Comment("Enable heavy patches on Reikas mods to allow running inside a dev env, will break mod integration. DO NOT USE OUTSIDE OF DEV ENV.")
     @Config.DefaultBoolean(value = false)
     public static boolean insideDevEnv;
+
+    @Config.Comment("Disable some generic IFluidHandler tooltips on TEs from RC, ReC & CC. Intended for usage if you have a nicer provider such as WailaPlugins.")
+    @Config.DefaultBoolean(value = false)
+    public static boolean disableWailaFluidTooltips;
 }

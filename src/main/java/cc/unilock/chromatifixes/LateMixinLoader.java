@@ -23,6 +23,7 @@ public class LateMixinLoader implements ILateMixinLoader {
         final boolean dragonapi = loadedMods.contains("DragonAPI");
         final boolean satisforestry = loadedMods.contains("Satisforestry");
         final boolean reactorcraft = loadedMods.contains("ReactorCraft");
+        final boolean rotarycraft = loadedMods.contains("RotaryCraft");
         final boolean dragonrealmcore = loadedMods.contains("DragonRealmCore");
 
         List<String> mixins = new ArrayList<>();
@@ -58,6 +59,9 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (ChromatiFixesConfig.enableShiftMazeBypassCrashFix) {
                 mixins.add("chromaticraft.ShiftMazeGeneratorMixin");
             }
+            if (ChromatiFixesConfig.disableWailaFluidTooltips) {
+                mixins.add("chromaticraft.BlockChromaTileMixin");
+            }
             mixins.add("chromaticraft.BlockDecoFlowerMixin");
         }
         if (dragonapi) {
@@ -73,8 +77,17 @@ public class LateMixinLoader implements ILateMixinLoader {
             mixins.add("satisforestry.SFEventsMixin");
             mixins.add("satisforestry.TileShaftConnectionMixin");
         }
+        if (rotarycraft) {
+            //This does not seem to work in debug dev env's
+            if (ChromatiFixesConfig.disableWailaFluidTooltips) {
+                mixins.add("rotarycraft.BlockBasicMultiTEMixin");
+            }
+        }
         if (reactorcraft) {
             mixins.add("reactorcraft.EntityTrackerEntryMixin");
+            if (ChromatiFixesConfig.disableWailaFluidTooltips) {
+                mixins.add("reactorcraft.BlockReactorTileMixin");
+            }
         }
         if (dragonrealmcore) {
             mixins.add("dragonrealmcore.BlockT2HexGeneratorMixin");
