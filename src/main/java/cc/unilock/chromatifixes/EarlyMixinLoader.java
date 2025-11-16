@@ -1,9 +1,6 @@
 package cc.unilock.chromatifixes;
 
 import Reika.DragonAPI.Libraries.Java.ReikaJVMParser;
-import Reika.DragonAPI.ModInteract.LegacyWailaHelper;
-import Reika.ReactorCraft.Blocks.BlockReactorTile;
-import Reika.RotaryCraft.Base.BlockBasicMachine;
 import com.gtnewhorizon.gtnhlib.config.ConfigException;
 import com.gtnewhorizon.gtnhlib.config.ConfigurationManager;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
@@ -36,6 +33,11 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
         List<String> mixins = new ArrayList<>();
+        try {
+            Class.forName("Reika.DragonAPI.Auxiliary.DragonAPIASMHandler");
+        } catch (ClassNotFoundException ignored) {
+            return mixins;
+        }
 
         // Disable Reikas ASMs here
         if (loadedCoreMods.contains("Reika.DragonAPI.Auxiliary.DragonAPIASMHandler")) {
@@ -46,6 +48,11 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
                 if (ChromatiFixesConfig.insideDevEnv) {
                     args.add("-DragonAPI_ForceMethodStrip");
                     args.add("-DragonAPI_disable_ASM_ENDERLOOKAGGROEVENT");
+                }
+
+                if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker") && ChromatiFixesConfig.insideDevEnv || ChromatiFixesConfig.fixAngelicaCTMBlocksCompat) {
+                    args.add("-DragonAPI_disable_ASM_GRASSSIDEICON");
+                    args.add("-DragonAPI_disable_ASM_LIQUIDICONRB");
                 }
 
                 if (loadedCoreMods.contains("Reika.RotaryCraft.Auxiliary.RotaryASMHandler")) {

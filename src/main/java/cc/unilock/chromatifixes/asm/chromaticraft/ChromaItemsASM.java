@@ -1,18 +1,23 @@
 package cc.unilock.chromatifixes.asm.chromaticraft;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.objectweb.asm.*;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 public class ChromaItemsASM implements IClassTransformer {
 
     public ChromaItemsASM() {
-        System.out.println("=== ChromaItemsASM CONSTRUCTOR CALLED ===");
     }
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
         if ("Reika.ChromatiCraft.Registry.ChromaItems".equals(transformedName)) {
-            System.out.println("=== PATCHING ChromaItems to remove problematic enum constants ===");
+            FMLLog.getLogger().info("PATCHING ChromaItems to remove problematic enum constants");
             return removeProblematicEnumConstants(basicClass);
         }
         return basicClass;
@@ -37,7 +42,6 @@ public class ChromaItemsASM implements IClassTransformer {
                                 String className = ((Type) cst).getClassName();
 
                                 if (isProblematicClass(className)) {
-                                    System.out.println("Replacing problematic class reference: " + className);
                                     // Replace with a safe class (Item.class)
                                     super.visitLdcInsn(Type.getType("Lnet/minecraft/item/Item;"));
                                     return;

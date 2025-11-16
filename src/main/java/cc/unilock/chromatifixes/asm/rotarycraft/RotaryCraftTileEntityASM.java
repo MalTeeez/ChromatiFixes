@@ -1,9 +1,13 @@
 package cc.unilock.chromatifixes.asm.rotarycraft;
 
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.objectweb.asm.*;
 
 import cpw.mods.fml.common.FMLLog;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 public class RotaryCraftTileEntityASM implements IClassTransformer {
 
@@ -26,7 +30,7 @@ public class RotaryCraftTileEntityASM implements IClassTransformer {
         reader.accept(new ClassVisitor(Opcodes.ASM5, writer) {
             @Override
             public MethodVisitor visitMethod(int access, String name, String desc, String signature,
-                    String[] exceptions) {
+                                             String[] exceptions) {
                 // Skip the getOCNetworkVisibility method entirely
                 if ("getOCNetworkVisibility".equals(name)) {
                     return null;

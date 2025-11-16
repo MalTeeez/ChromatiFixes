@@ -1,9 +1,14 @@
 package cc.unilock.chromatifixes.asm.rotarycraft;
 
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.objectweb.asm.*;
 
 import cpw.mods.fml.common.FMLLog;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 public class ItemRegistryASM implements IClassTransformer {
 

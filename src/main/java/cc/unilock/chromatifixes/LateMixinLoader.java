@@ -25,6 +25,9 @@ public class LateMixinLoader implements ILateMixinLoader {
         final boolean reactorcraft = loadedMods.contains("ReactorCraft");
         final boolean rotarycraft = loadedMods.contains("RotaryCraft");
         final boolean dragonrealmcore = loadedMods.contains("DragonRealmCore");
+        final boolean waila = loadedMods.contains("Waila");
+        final boolean wailaplugins = loadedMods.contains("wailaplugins");
+        final boolean nei = loadedMods.contains("NotEnoughItems");
 
         List<String> mixins = new ArrayList<>();
 
@@ -59,8 +62,10 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (ChromatiFixesConfig.enableShiftMazeBypassCrashFix) {
                 mixins.add("chromaticraft.ShiftMazeGeneratorMixin");
             }
-            if (ChromatiFixesConfig.disableWailaFluidTooltips) {
-                mixins.add("chromaticraft.BlockChromaTileMixin");
+            if (wailaplugins && ChromatiFixesConfig.disableWailaFluidTooltips) {
+                mixins.add("chromaticraft.wailatank.BlockChromaTileMixin");
+                mixins.add("chromaticraft.wailatank.TileEntityCrystalTankMixin");
+                mixins.add("chromaticraft.wailatank.BlockCrystalTankMixin");
             }
             mixins.add("chromaticraft.BlockDecoFlowerMixin");
         }
@@ -79,13 +84,13 @@ public class LateMixinLoader implements ILateMixinLoader {
         }
         if (rotarycraft) {
             //This does not seem to work in debug dev env's
-            if (ChromatiFixesConfig.disableWailaFluidTooltips) {
+            if (wailaplugins && ChromatiFixesConfig.disableWailaFluidTooltips) {
                 mixins.add("rotarycraft.BlockBasicMultiTEMixin");
             }
         }
         if (reactorcraft) {
             mixins.add("reactorcraft.EntityTrackerEntryMixin");
-            if (ChromatiFixesConfig.disableWailaFluidTooltips) {
+            if (wailaplugins && ChromatiFixesConfig.disableWailaFluidTooltips) {
                 mixins.add("reactorcraft.BlockReactorTileMixin");
             }
         }
@@ -100,6 +105,9 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (ChromatiFixesConfig.energizationManagerFix) {
                 mixins.add("dragonrealmcore.EnergizationManagerMixin");
             }
+        }
+        if (nei && ChromatiFixesConfig.fixNEIInvalidAccessErrorCrash) {
+            mixins.add("compat.nei.NBTHelperMixin");
         }
         return mixins;
     }

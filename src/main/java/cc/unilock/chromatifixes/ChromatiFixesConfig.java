@@ -47,4 +47,12 @@ public class ChromatiFixesConfig {
     @Config.Comment("Disable some generic IFluidHandler tooltips on TEs from RC, ReC & CC. Intended for usage if you have a nicer provider such as WailaPlugins.")
     @Config.DefaultBoolean(value = false)
     public static boolean disableWailaFluidTooltips;
+
+    @Config.Comment("Fixes a crash where Angelica's MCPatcher CTM module does not apply / crashes the game on startup.")
+    @Config.DefaultBoolean(true)
+    public static boolean fixAngelicaCTMBlocksCompat;
+
+    @Config.Comment("Fixes a crash when hovering over some ChromatiCraft blocks in NEI and the tagMap AT isn't loaded.")
+    @Config.DefaultBoolean(false)
+    public static boolean fixNEIInvalidAccessErrorCrash;
 }

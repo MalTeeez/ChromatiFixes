@@ -1,6 +1,7 @@
-package cc.unilock.chromatifixes.mixin.late.chromaticraft;
+package cc.unilock.chromatifixes.mixin.late.chromaticraft.wailatank;
 
 import Reika.ChromatiCraft.Base.BlockChromaTile;
+import Reika.ChromatiCraft.TileEntity.Storage.TileEntityCrystalTank;
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -18,6 +19,16 @@ public class BlockChromaTileMixin {
         at = @At(value = "MIXINEXTRAS:EXPRESSION")
     )
     private boolean disableWailaFluidTooltip(boolean original) {
+        return false;
+    }
+
+    @Definition(id = "TileEntityCrystalTank", type = TileEntityCrystalTank.class)
+    @Expression("? instanceof TileEntityCrystalTank")
+    @ModifyExpressionValue(
+        method = "getWailaBody",
+        at = @At(value = "MIXINEXTRAS:EXPRESSION")
+    )
+    private boolean disableWailaCrystalTankTooltip(boolean original) {
         return false;
     }
 }
