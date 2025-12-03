@@ -68,7 +68,9 @@ public class LateMixinLoader implements ILateMixinLoader {
                 mixins.add("chromaticraft.wailatank.BlockCrystalTankMixin");
             }
             mixins.add("chromaticraft.BlockDecoFlowerMixin");
+
             mixins.add("chromaticraft.biomeeffects.BiomeFXRendererMixin");
+            mixins.add("chromaticraft.biomeeffects.CliffFogRendererCloudMixin");
 
             mixins.add("chromaticraft.memoryleaks.EndOverhaulManagerMixin");
             mixins.add("chromaticraft.memoryleaks.EndTendrilMixin");
