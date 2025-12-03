@@ -100,6 +100,18 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Rename JAR files to lowercase
+        run: |
+          cd build/libs
+          for file in *.jar; do
+            lowercase=$(echo "$file" | tr '[:upper:]' '[:lower:]')
+            if [ "$file" != "$lowercase" ]; then
+              mv "$file" "$lowercase"
+              echo "Renamed: $file -> $lowercase"
+            fi
+          done
+        shell: bash
+
       - name: Publish to Maven
         run: ./gradlew --build-cache --info --stacktrace -PmavenPublishUrl='${{ env.MAVEN_PUBLISHING_URL }}' assemble publish -x test
         continue-on-error: true
@@ -107,6 +119,7 @@ jobs:
           MAVEN_USER: ${{ github.actor }}
           MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_PUBLISHING_URL: https://maven.pkg.github.com/${{ github.repository }}
+          ARTIFACT_ID: chromatifixes
 
       - name: Publish to Modrinth
         run: ./gradlew --build-cache --info --stacktrace -PmavenPublishUrl='${{ env.MAVEN_PUBLISHING_URL }}' assemble publish -x test
