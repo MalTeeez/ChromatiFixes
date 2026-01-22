@@ -55,4 +55,8 @@ public class ChromatiFixesConfig {
     @Config.Comment("Fixes a crash when hovering over some ChromatiCraft blocks in NEI and the tagMap AT isn't loaded.")
     @Config.DefaultBoolean(false)
     public static boolean fixNEIInvalidAccessErrorCrash;
+
+    @Config.Comment("Forces ChromatiCraft to use cached EDDB trade data instead of trying to fetch it and freezing up during loading because the site has been down since 2022.")
+    @Config.DefaultBoolean(true)
+    public static boolean forceUseCachedEDDBTrades;
 }

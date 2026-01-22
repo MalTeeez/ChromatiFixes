@@ -58,6 +58,8 @@ dependencies {
 
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:Angelica:2.0.0-alpha8:dev") { transitive = false }
 
+    compileOnly(rfg.deobf("curse.maven:thaumcraft-223628:2227552"))
+
     //runtimeOnly("com.github.GTNewHorizons:EnderIO:2.10.15:dev") { transitive = false }
     //runtimeOnly("com.github.GTNewHorizons:TinkersConstruct:1.14.22-GTNH:dev") { transitive = true }
     //runtimeOnly('curse.maven:cofh-lib-220333:2388748')

@@ -44,10 +44,15 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
             try {
                 Field argsField = ReikaJVMParser.class.getDeclaredField("args");
                 argsField.setAccessible(true);
+                @SuppressWarnings("unchecked") // We know the type
                 HashSet<String> args = (HashSet<String>) argsField.get(null);
                 if (ChromatiFixesConfig.insideDevEnv) {
                     args.add("-DragonAPI_ForceMethodStrip");
                     args.add("-DragonAPI_disable_ASM_ENDERLOOKAGGROEVENT");
+                }
+
+                if (ChromatiFixesConfig.forceUseCachedEDDBTrades) {
+                    args.add("useCachedEDDBForCC");
                 }
 
                 if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker") && ChromatiFixesConfig.insideDevEnv || ChromatiFixesConfig.fixAngelicaCTMBlocksCompat) {
