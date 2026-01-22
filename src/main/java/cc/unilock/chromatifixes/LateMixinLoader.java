@@ -51,13 +51,16 @@ public class LateMixinLoader implements ILateMixinLoader {
             mixins.add("cavecontrol.CaveLoaderMixin");
         }
         if (chromaticraft) {
+            mixins.add("chromaticraft.accessor.CrystalBlockAccessor");
             mixins.add("chromaticraft.accessor.TileEntityCrystalBroadcasterAccessor");
             mixins.add("chromaticraft.DungeonGeneratorMixin");
             mixins.add("chromaticraft.ProgressionManagerMixin");
             mixins.add("chromaticraft.PylonFinderMixin");
             mixins.add("chromaticraft.PylonGeneratorMixin");
             mixins.add("chromaticraft.TileEntityCrystalBroadcasterMixin");
-            mixins.add("chromaticraft.TileEntityLumenAlvearyEffectMixins");
+            mixins.add("chromaticraft.TileEntityLumenAlvearyHumidityMatchingEffectMixin");
+            mixins.add("chromaticraft.TileEntityLumenAlvearyTemperatureMatchingEffectMixin");
+            mixins.add("chromaticraft.TileEntityPlayerDelegateMixin");
             mixins.add("chromaticraft.TileEntityWirelessPoweredMixin");
             if (ChromatiFixesConfig.enableShiftMazeBypassCrashFix) {
                 mixins.add("chromaticraft.ShiftMazeGeneratorMixin");
