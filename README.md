@@ -5,7 +5,7 @@ Various fixes for issues found in some of Reika's mods.
 
 Most credit goes to [gamrguy](https://github.com/gamrguy) a.k.a. "RobotLucca" a.k.a. "thegamemaster1234" for creating the original ASM-based ChromatiFixes
 
-Fixes:
+## Fixes:
 - CaveControl
   - Prevents `CaveLoader#getEffectiveBiome` from ever returning a null biome, fixing crashes usually caused by pylon chunk loading (thegamemaster1234)
 - ChromatiCraft
@@ -32,3 +32,10 @@ Fixes:
   - With `disableTerritoryStrongholdSystem` enabled, disables the TerritoryStrongholdSystem (unilock)
   - Prevents NullPointerExceptions caused by Hex Generators (thegamemaster1234)
   - With `energizationManagerFix` enabled, prevents crashes in `EnergizationManager#getEnergizationLevel` (however, the chosen fix prevents playing with the "Atmospheric Permeability Mediation" mechanic) (thegamemaster1234)
+
+
+## Todos:
+- Functionally disable the SetBlock Event from DAPI, since it basically does not get used and costs a lot of performance
+  - Is not used: https://github.com/ReikaKalseki/DragonAPI/blob/c29c4fcc2d3a65566783a4a163d8e682116e868c/Instantiable/Event/SetBlockEvent.java#L22
+    - https://github.com/search?q=SetBlockEvent.Pre&type=code
+    - https://github.com/search?q=SetBlockEvent.Post&type=code

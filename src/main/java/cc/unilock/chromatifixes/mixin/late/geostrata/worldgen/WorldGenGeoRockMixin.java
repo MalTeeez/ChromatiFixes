@@ -1,5 +1,7 @@
 package cc.unilock.chromatifixes.mixin.late.geostrata.worldgen;
 
+import Reika.DragonAPI.Auxiliary.WorldGenInterceptionRegistry;
+import Reika.DragonAPI.Instantiable.Event.SetBlockEvent;
 import Reika.GeoStrata.World.WorldGenGeoRock;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
@@ -49,38 +51,47 @@ public abstract class WorldGenGeoRockMixin {
             sinEnvelope[l] = MathHelper.sin(l * (float) Math.PI / size);
         }
 
-        for (int l = 0; l <= size; ++l) {
-            double d6 = d0 + (d1 - d0) * l / size;
-            double d7 = d4 + (d5 - d4) * l / size;
-            double d8 = d2 + (d3 - d2) * l / size;
-            double d9 = rand.nextDouble() * size / 16.0D;
-            // sinEnvelope[l] replaces two calls to MathHelper.sin(l * PI / size)
-            double d10 = (sinEnvelope[l] + 1.0F) * d9 + 1.0D;
-            double d11 = d10;
+        try {
+            WorldGenInterceptionRegistry.skipLighting = true;
+            SetBlockEvent.eventEnabledPre = false;
+            SetBlockEvent.eventEnabledPost = false;
 
-            int i1 = MathHelper.floor_double(d6 - d10 / 2.0D);
-            int j1 = MathHelper.floor_double(d7 - d11 / 2.0D);
-            int k1 = MathHelper.floor_double(d8 - d10 / 2.0D);
-            int l1 = MathHelper.floor_double(d6 + d10 / 2.0D);
-            int i2 = MathHelper.floor_double(d7 + d11 / 2.0D);
-            int j2 = MathHelper.floor_double(d8 + d10 / 2.0D);
+            for (int l = 0; l <= size; ++l) {
+                double t = (double) l / size;
+                double d6 = d0 + (d1 - d0) * t;
+                double d7 = d4 + (d5 - d4) * t;
+                double d8 = d2 + (d3 - d2) * t;
+                double d9 = rand.nextDouble() * size / 16.0D;
+                // sinEnvelope[l] replaces two calls to MathHelper.sin(l * PI / size)
+                double d10 = ((sinEnvelope[l] + 1.0F) * d9 + 1.0D) / 2.0D;
 
-            for (int dx = i1; dx <= l1; dx++) {
-                double d12 = (dx + 0.5D - d6) / (d10 / 2.0D);
-                if (d12 * d12 < 1.0D) {
-                    for (int dy = j1; dy <= i2; dy++) {
-                        double d13 = (dy + 0.5D - d7) / (d11 / 2.0D);
-                        if (d12 * d12 + d13 * d13 < 1.0D) {
-                            for (int dz = k1; dz <= j2; dz++) {
-                                double d14 = (dz + 0.5D - d8) / (d10 / 2.0D);
-                                if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D) {
-                                    Block b = world.getBlock(dx, dy, dz);
-                                    int meta = world.getBlockMetadata(dx, dy, dz);
-                                    if (this.canGenerateIn(world, dx, dy, dz, b, meta)) {
-                                        // flag 0 instead of 2.
-                                        // Flag 2 triggers neighbor stuff, that should not be triggered during worldgen.
-                                        world.setBlock(dx, dy, dz, id, 0, 0);
-                                        count++;
+                int i1 = MathHelper.floor_double(d6 - d10);
+                int j1 = MathHelper.floor_double(d7 - d10);
+                int k1 = MathHelper.floor_double(d8 - d10);
+                int l1 = MathHelper.floor_double(d6 + d10);
+                int i2 = MathHelper.floor_double(d7 + d10);
+                int j2 = MathHelper.floor_double(d8 + d10);
+
+                double invHalfD10 = 1.0D / d10;
+
+                for (int dx = i1; dx <= l1; dx++) {
+                    double d12 = (dx + 0.5D - d6) * invHalfD10;
+                    double d12sq = d12 * d12;
+                    if (d12sq < 1.0D) {
+                        for (int dy = j1; dy <= i2; dy++) {
+                            double d13 = (dy + 0.5D - d7) * invHalfD10;
+                            double d12d13sq = d12sq + d13 * d13;
+                            if (d12d13sq < 1.0D) {
+                                double remaining = 1.0D - d12d13sq;
+                                for (int dz = k1; dz <= j2; dz++) {
+                                    double d14 = (dz + 0.5D - d8) * invHalfD10;
+                                    if (d14 * d14 < remaining) {
+                                        Block b = world.getBlock(dx, dy, dz);
+                                        int meta = world.getBlockMetadata(dx, dy, dz);
+                                        if (this.canGenerateIn(world, dx, dy, dz, b, meta)) {
+                                            world.setBlock(dx, dy, dz, id, 0, 0);
+                                            count++;
+                                        }
                                     }
                                 }
                             }
@@ -88,6 +99,10 @@ public abstract class WorldGenGeoRockMixin {
                     }
                 }
             }
+        } finally {
+            WorldGenInterceptionRegistry.skipLighting = false;
+            SetBlockEvent.eventEnabledPre = true;
+            SetBlockEvent.eventEnabledPost = true;
         }
 
         //noinspection ReassignedVariable - Is complaining because the above AssertionError makes it think count is effectively final, but we know it isn't.

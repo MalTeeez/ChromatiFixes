@@ -1,5 +1,8 @@
 package cc.unilock.chromatifixes.mixin.late.geostrata.worldgen;
 
+import Reika.DragonAPI.Auxiliary.WorldGenInterceptionRegistry;
+import Reika.DragonAPI.Instantiable.Event.SetBlockEvent;
+import Reika.GeoStrata.World.LavaRockGenerator;
 import Reika.GeoStrata.World.LavaRockGeneratorRedesign;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -25,12 +28,19 @@ public abstract class LavaRockGeneratorRedesignMixin {
 
     @Shadow private SimplexNoiseGenerator lavaRockThickness;
 
+    @Shadow
+    protected abstract void seedNoise(World world);
+
     /**
      * @author MalTeeez
      * @reason The original is very unlikely to be changed, and this makes it a lot more efficient than loads of wrap operations.
      * Also, this way we can easily use our local methods, and we don't have to change the 2 others.
+     * <p>
      * Precompute lava position boolean array and noise meta step grid to eliminate repeated getBlock
      * calls in getLavaDistance and repeated noise evaluation in getMetaStep per recursive placeBlock call.
+     * <p>
+     * Also reduce the impact of the placeBlock calls we have to make, by disabling built-in generation skip flags
+     * in DragonAPI & GeoStrata.
      */
     @Overwrite
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
@@ -51,6 +61,7 @@ public abstract class LavaRockGeneratorRedesignMixin {
         }
 
         // Precompute meta step grid — one noise evaluation per x/z column instead of one per recursive placeBlock call
+        this.seedNoise(world);
         int[][] metaStepGrid = new int[16][16];
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
@@ -62,19 +73,31 @@ public abstract class LavaRockGeneratorRedesignMixin {
             }
         }
 
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 1; y <= 14; y++) {
-                    Block b = c.getBlock(x, y, z);
-                    if (b.isReplaceableOreGen(world, x + chunkX * 16, y, z + chunkZ * 16, Blocks.stone)
-                        || b == GeoBlocks.LAVAROCK.getBlockInstance()) {
-                        int d = this.chromatiFixes$getLavaDistance(hasLava, x, y, z);
-                        if (d <= 4) {
-                            this.chromatiFixes$placeBlock(c, x, y, z, d - 1, b, metaStepGrid);
+        try {
+            WorldGenInterceptionRegistry.skipLighting = true;
+            SetBlockEvent.eventEnabledPre = false;
+            SetBlockEvent.eventEnabledPost = false;
+            LavaRockGenerator.instance.doingLavaRockGen = true;
+
+            for (int x = 0; x < 16; x++) {
+                for (int z = 0; z < 16; z++) {
+                    for (int y = 1; y <= 14; y++) {
+                        Block b = c.getBlock(x, y, z);
+                        if (b.isReplaceableOreGen(world, x + chunkX * 16, y, z + chunkZ * 16, Blocks.stone)
+                            || b == GeoBlocks.LAVAROCK.getBlockInstance()) {
+                            int d = this.chromatiFixes$getLavaDistance(hasLava, x, y, z);
+                            if (d <= 4) {
+                                this.chromatiFixes$placeBlock(c, x, y, z, d - 1, b, metaStepGrid);
+                            }
                         }
                     }
                 }
             }
+        } finally {
+            WorldGenInterceptionRegistry.skipLighting = false;
+            SetBlockEvent.eventEnabledPre = true;
+            SetBlockEvent.eventEnabledPost = true;
+            LavaRockGenerator.instance.doingLavaRockGen = false;
         }
     }
 
