@@ -56,7 +56,15 @@ public class ChromatiFixesConfig {
     @Config.DefaultBoolean(false)
     public static boolean fixNEIInvalidAccessErrorCrash;
 
-    @Config.Comment("Forces ChromatiCraft to use cached EDDB trade data instead of trying to fetch it and freezing up during loading because the site has been down since 2022.")
+    @Config.Comment("Forces ChromatiCraft to use cached EDDB trade data instead of trying to fetch it and freezing up during loading, because the site has been down since 2022.")
     @Config.DefaultBoolean(true)
     public static boolean forceUseCachedEDDBTrades;
+
+    @Config.Comment("Disables DAPI's optional rain toggling in favor of Angelica's built in toggle. Is only active if angelica is present.")
+    @Config.DefaultBoolean(true)
+    public static boolean disableDAPIRainTweaks;
+
+    @Config.Comment("Makes Custom Item Property of Shaders in Angelica compatible with base modifications from CC. Is only active if angelica is present. Requires Angelica 2.1.3+.")
+    @Config.DefaultBoolean(true)
+    public static boolean fixAngelicaShaderCIPCompat;
 }

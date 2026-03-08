@@ -60,6 +60,10 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
                     args.add("-DragonAPI_disable_ASM_LIQUIDICONRB");
                 }
 
+                if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker") && ChromatiFixesConfig.disableDAPIRainTweaks) {
+                    args.add("-DragonAPI_disable_ASM_RAINPARTICLEHOOK");
+                }
+
                 if (loadedCoreMods.contains("Reika.RotaryCraft.Auxiliary.RotaryASMHandler")) {
 
                 }

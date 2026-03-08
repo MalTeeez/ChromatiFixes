@@ -1,4 +1,4 @@
-package cc.unilock.chromatifixes.mixin.late.chromaticraft.memoryleaks;
+package cc.unilock.chromatifixes.mixin.late.chromaticraft.worldgen;
 
 import Reika.DragonAPI.Instantiable.Data.Immutable.BlockKey;
 import Reika.DragonAPI.Instantiable.Data.Immutable.Coordinate;

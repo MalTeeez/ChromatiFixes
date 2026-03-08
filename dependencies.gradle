@@ -34,8 +34,8 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    api("com.github.GTNewHorizons:GTNHLib:0.9.3:dev") { transitive = false }
-    devOnlyNonPublishable("com.github.GTNewHorizons:Hodgepodge:2.7.48") { transitive = false }
+    api("com.github.GTNewHorizons:GTNHLib:0.9.37:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:Hodgepodge:2.7.95") { transitive = false }
 
     devOnlyNonPublishable(rfg.deobf("curse.maven:dragonapi-235591:4722480"))
     devOnlyNonPublishable(rfg.deobf("curse.maven:chromaticraft-235590:4721192"))
@@ -48,20 +48,23 @@ dependencies {
 
     compileOnly(rfg.deobf(project.files("libs/DragonRealmCore 1.7.10 V33a.jar")))
 
-    devOnlyNonPublishable("com.github.GTNewHorizons:CodeChickenCore:1.4.10:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:CodeChickenCore:1.4.11:dev") { transitive = false }
     //compileOnly("com.github.GTNewHorizons:CodeChickenLib:1.3.0:dev") { transitive = false }
-    devOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.8.54-GTNH:dev") { transitive = false }
-    devOnlyNonPublishable("com.github.GTNewHorizons:waila:1.19.19:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.8.73-GTNH:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:waila:1.19.22:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:WAILAPlugins:0.7.2:dev") { transitive = false }
     //required by wailaplugins
-    devOnlyNonPublishable("com.github.GTNewHorizons:EnderCore:0.5.3:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:EnderCore:0.5.7:dev") { transitive = false }
 
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Angelica:2.0.0-alpha8:dev") { transitive = false }
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:spark:v0.0.15-pre:fat-dev")
+
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Angelica:2.1.1:dev") { transitive = false }
+    //runtimeOnlyNonPublishable(files("libs/angelica-2.1.1-master.10+cb5e2ed7d4-dirty-dev.jar"))
 
     compileOnly(rfg.deobf("curse.maven:thaumcraft-223628:2227552"))
 
-    //runtimeOnly("com.github.GTNewHorizons:EnderIO:2.10.15:dev") { transitive = false }
-    //runtimeOnly("com.github.GTNewHorizons:TinkersConstruct:1.14.22-GTNH:dev") { transitive = true }
+    //runtimeOnly("com.github.GTNewHorizons:EnderIO:2.10.21:dev") { transitive = false }
+    //runtimeOnly("com.github.GTNewHorizons:TinkersConstruct:1.14.32-GTNH:dev") { transitive = true }
     //runtimeOnly('curse.maven:cofh-lib-220333:2388748')
 
     // Mods required for semi-non stripped reika dev env
@@ -85,11 +88,11 @@ dependencies {
         //    runtimeOnly(rfg.deobf(project.files("libs/ProjectE-1.7.10-PE1.10.1.jar")))
         //}
         //runtimeOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") { transitive = false }
-        //runtimeOnly("com.github.GTNewHorizons:Botania:1.13.10-GTNH:dev") { transitive = false }
-        //runtimeOnly("com.github.GTNewHorizons:Baubles-Expanded:2.2.6-GTNH:dev") { transitive = false }
-        //runtimeOnly("com.github.GTNewHorizons:ForestryMC:4.11.4:dev") { transitive = false }
-        //runtimeOnly("com.github.GTNewHorizons:BloodMagic:1.8.8:dev") { transitive = false }
-        //runtimeOnly("com.github.GTNewHorizons:BuildCraft:7.1.48:dev") { transitive = false }
+        //runtimeOnly("com.github.GTNewHorizons:Botania:1.13.16-GTNH:dev") { transitive = false }
+        //runtimeOnly("com.github.GTNewHorizons:Baubles-Expanded:2.2.9-GTNH:dev") { transitive = false }
+        //runtimeOnly("com.github.GTNewHorizons:ForestryMC:4.11.8:dev") { transitive = false }
+        //runtimeOnly("com.github.GTNewHorizons:BloodMagic:1.8.13:dev") { transitive = false }
+        //runtimeOnly("com.github.GTNewHorizons:BuildCraft:7.1.55:dev") { transitive = false }
         //runtimeOnly('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev') { transitive = false }
 
 

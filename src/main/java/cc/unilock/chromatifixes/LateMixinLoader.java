@@ -25,9 +25,11 @@ public class LateMixinLoader implements ILateMixinLoader {
         final boolean reactorcraft = loadedMods.contains("ReactorCraft");
         final boolean rotarycraft = loadedMods.contains("RotaryCraft");
         final boolean dragonrealmcore = loadedMods.contains("DragonRealmCore");
+        final boolean geostrata = loadedMods.contains("GeoStrata");
         final boolean waila = loadedMods.contains("Waila");
         final boolean wailaplugins = loadedMods.contains("wailaplugins");
         final boolean nei = loadedMods.contains("NotEnoughItems");
+        final boolean angelica = loadedMods.contains("Angelica");
 
         List<String> mixins = new ArrayList<>();
 
@@ -75,8 +77,13 @@ public class LateMixinLoader implements ILateMixinLoader {
             mixins.add("chromaticraft.biomeeffects.BiomeFXRendererMixin");
             mixins.add("chromaticraft.biomeeffects.CliffFogRendererCloudMixin");
 
-            mixins.add("chromaticraft.memoryleaks.EndOverhaulManagerMixin");
-            mixins.add("chromaticraft.memoryleaks.EndTendrilMixin");
+            mixins.add("chromaticraft.worldgen.EndOverhaulManagerMixin");
+            mixins.add("chromaticraft.worldgen.EndTendrilMixin");
+            mixins.add("chromaticraft.worldgen.GlowingCliffsColumnShaperMixin");
+
+            if (angelica && ChromatiFixesConfig.fixAngelicaShaderCIPCompat) {
+                mixins.add("chromaticraft.client.EnderCrystalRendererMixin");
+            }
         }
         if (dragonapi) {
             mixins.add("dragonapi.AbstractSearchFoundPathMixin");
@@ -86,6 +93,11 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (ChromatiFixesConfig.allowHigherIDSpace) {
                 mixins.add("dragonapi.IDTypeMixin");
             }
+        }
+        if (geostrata) {
+            mixins.add("geostrata.worldgen.ArcticSpiresGeneratorArcticSpireMixin");
+            mixins.add("geostrata.worldgen.WorldGenGeoRockMixin");
+            mixins.add("geostrata.worldgen.LavaRockGeneratorRedesignMixin");
         }
         if (satisforestry) {
             mixins.add("satisforestry.SFEventsMixin");

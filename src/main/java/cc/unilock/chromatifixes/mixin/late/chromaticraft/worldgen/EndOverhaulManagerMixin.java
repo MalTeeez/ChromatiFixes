@@ -1,4 +1,4 @@
-package cc.unilock.chromatifixes.mixin.late.chromaticraft.memoryleaks;
+package cc.unilock.chromatifixes.mixin.late.chromaticraft.worldgen;
 
 import Reika.ChromatiCraft.World.EndOverhaulManager;
 import Reika.DragonAPI.Instantiable.Data.Immutable.BlockKey;
