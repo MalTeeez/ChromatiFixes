@@ -30,6 +30,10 @@ public class LateMixinLoader implements ILateMixinLoader {
         final boolean wailaplugins = loadedMods.contains("wailaplugins");
         final boolean nei = loadedMods.contains("NotEnoughItems");
         final boolean angelica = loadedMods.contains("Angelica");
+        final boolean streams = loadedMods.contains("streams");
+        final boolean thaumcraft = loadedMods.contains("Thaumcraft");
+        final boolean tinkersconstruct = loadedMods.contains("TConstruct");
+        final boolean chisel = loadedMods.contains("chisel");
 
         List<String> mixins = new ArrayList<>();
 
@@ -84,6 +88,20 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (angelica && ChromatiFixesConfig.fixAngelicaShaderCIPCompat) {
                 mixins.add("chromaticraft.client.EnderCrystalRendererMixin");
             }
+
+            if (ChromatiFixesConfig.replaceDefaultBlockPlaceEvent) {
+                if (thaumcraft) {
+                    mixins.add("perfblockplace.thaumcraft.ThaumcraftWorldGeneratorCCMixin");
+                    mixins.add("perfblockplace.thaumcraft.WorldGenHilltopStonesCCMixin");
+                }
+                if (tinkersconstruct) {
+                    mixins.add("perfblockplace.tinkersconstruct.SlimeIslandGenMixin");
+                }
+                if (chisel) {
+                    mixins.add("perfblockplace.chisel.GeneratorChiselMixin");
+                }
+
+            }
         }
         if (dragonapi) {
             mixins.add("dragonapi.AbstractSearchFoundPathMixin");
@@ -102,12 +120,29 @@ public class LateMixinLoader implements ILateMixinLoader {
         if (satisforestry) {
             mixins.add("satisforestry.SFEventsMixin");
             mixins.add("satisforestry.TileShaftConnectionMixin");
+
+            if (ChromatiFixesConfig.replaceDefaultBlockPlaceEvent) {
+                if (thaumcraft) {
+                    mixins.add("perfblockplace.thaumcraft.ThaumcraftWorldGeneratorSFMixin");
+                }
+                // Register this if we haven't already (in cc)
+                if (!chromaticraft) {
+                    if (tinkersconstruct) {
+                        mixins.add("perfblockplace.tinkersconstruct.SlimeIslandGenMixin");
+                    }
+                }
+            }
         }
         if (rotarycraft) {
             //This does not seem to work in debug dev env's
             if (wailaplugins && ChromatiFixesConfig.disableWailaFluidTooltips) {
                 mixins.add("rotarycraft.BlockBasicMultiTEMixin");
             }
+
+            if (streams && ChromatiFixesConfig.replaceDefaultBlockPlaceEvent) {
+                mixins.add("perfblockplace.streams.BlockRiverMixin");
+            }
+
         }
         if (reactorcraft) {
             mixins.add("reactorcraft.EntityTrackerEntryMixin");

@@ -40,47 +40,47 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
         }
 
         // Disable Reikas ASMs here
-        if (loadedCoreMods.contains("Reika.DragonAPI.Auxiliary.DragonAPIASMHandler")) {
-            try {
-                Field argsField = ReikaJVMParser.class.getDeclaredField("args");
-                argsField.setAccessible(true);
-                @SuppressWarnings("unchecked") // We know the type
-                HashSet<String> args = (HashSet<String>) argsField.get(null);
-                if (ChromatiFixesConfig.insideDevEnv) {
-                    args.add("-DragonAPI_ForceMethodStrip");
-                    args.add("-DragonAPI_disable_ASM_ENDERLOOKAGGROEVENT");
-                }
-
-                if (ChromatiFixesConfig.forceUseCachedEDDBTrades) {
-                    args.add("useCachedEDDBForCC");
-                }
-
-                if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker") && ChromatiFixesConfig.insideDevEnv || ChromatiFixesConfig.fixAngelicaCTMBlocksCompat) {
-                    args.add("-DragonAPI_disable_ASM_GRASSSIDEICON");
-                    args.add("-DragonAPI_disable_ASM_LIQUIDICONRB");
-                }
-
-                if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker") && ChromatiFixesConfig.disableDAPIRainTweaks) {
-                    args.add("-DragonAPI_disable_ASM_RAINPARTICLEHOOK");
-                }
-
-                if (loadedCoreMods.contains("Reika.RotaryCraft.Auxiliary.RotaryASMHandler")) {
-
-                }
-                if (loadedCoreMods.contains("Reika.ChromatiCraft.Auxiliary.ChromaASMHandler")) {
-
-                }
-
-                if (loadedCoreMods.contains("Reika.DragonRealmCore.DragonRealmASM")) {
-                    if (ChromatiFixesConfig.disableTickInterceptASM) {
-                        args.add("-DragonAPI_disable_ASM_TICKINTERCEPT");
-                    }
-                }
-
-
-            } catch (Throwable e) {
-                throw new RuntimeException(e);
+        try {
+            Field argsField = ReikaJVMParser.class.getDeclaredField("args");
+            argsField.setAccessible(true);
+            @SuppressWarnings("unchecked") // We know the type
+            HashSet<String> args = (HashSet<String>) argsField.get(null);
+            if (ChromatiFixesConfig.insideDevEnv) {
+                args.add("-DragonAPI_ForceMethodStrip");
+                args.add("-DragonAPI_disable_ASM_ENDERLOOKAGGROEVENT");
             }
+
+            if (ChromatiFixesConfig.forceUseCachedEDDBTrades) {
+                args.add("useCachedEDDBForCC");
+            }
+
+            if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker") && ChromatiFixesConfig.insideDevEnv || ChromatiFixesConfig.fixAngelicaCTMBlocksCompat) {
+                args.add("-DragonAPI_disable_ASM_GRASSSIDEICON");
+                args.add("-DragonAPI_disable_ASM_LIQUIDICONRB");
+            }
+
+            if (loadedCoreMods.contains("com.gtnewhorizons.angelica.loading.AngelicaTweaker") && ChromatiFixesConfig.disableDAPIRainTweaks) {
+                args.add("-DragonAPI_disable_ASM_RAINPARTICLEHOOK");
+            }
+
+            if (loadedCoreMods.contains("Reika.RotaryCraft.Auxiliary.RotaryASMHandler")) {
+
+            }
+
+            if (loadedCoreMods.contains("Reika.ChromatiCraft.Auxiliary.ChromaASMHandler") && ChromatiFixesConfig.replaceDefaultBlockPlaceEvent) {
+                mixins.add("perfblockplace.WorldGenDungeonsMixin");
+                mixins.add("perfblockplace.StructureMineshaftPiecesMixin");
+            }
+
+            if (loadedCoreMods.contains("Reika.DragonRealmCore.DragonRealmASM")) {
+                if (ChromatiFixesConfig.disableTickInterceptASM) {
+                    args.add("-DragonAPI_disable_ASM_TICKINTERCEPT");
+                }
+            }
+
+
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
         }
         return mixins;
     }

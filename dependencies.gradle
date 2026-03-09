@@ -63,6 +63,13 @@ dependencies {
 
     compileOnly(rfg.deobf("curse.maven:thaumcraft-223628:2227552"))
 
+    // BlockPlaceEvent Replacement tweaks:
+    //runtimeOnly(rfg.deobf(files("libs/Farseek-1.7.10-2.0.1.jar")))
+    compileOnly(rfg.deobf(files("libs/Streams-1.7.10-0.3.4.jar")))
+
+    devOnlyNonPublishable("com.github.GTNewHorizons:TinkersConstruct:1.14.34-GTNH:dev") { transitive = true }
+    devOnlyNonPublishable("com.github.GTNewHorizons:Chisel:2.17.20-GTNH:dev")
+
     //runtimeOnly("com.github.GTNewHorizons:EnderIO:2.10.21:dev") { transitive = false }
     //runtimeOnly("com.github.GTNewHorizons:TinkersConstruct:1.14.32-GTNH:dev") { transitive = true }
     //runtimeOnly('curse.maven:cofh-lib-220333:2388748')
@@ -92,7 +99,7 @@ dependencies {
         //runtimeOnly("com.github.GTNewHorizons:Baubles-Expanded:2.2.9-GTNH:dev") { transitive = false }
         //runtimeOnly("com.github.GTNewHorizons:ForestryMC:4.11.8:dev") { transitive = false }
         //runtimeOnly("com.github.GTNewHorizons:BloodMagic:1.8.13:dev") { transitive = false }
-        //runtimeOnly("com.github.GTNewHorizons:BuildCraft:7.1.55:dev") { transitive = false }
+        compileOnly("com.github.GTNewHorizons:BuildCraft:7.1.55:dev") { transitive = false }
         //runtimeOnly('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev') { transitive = false }
 
 

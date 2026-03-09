@@ -67,4 +67,27 @@ public class ChromatiFixesConfig {
     @Config.Comment("Makes Custom Item Property of Shaders in Angelica compatible with base modifications from CC. Is only active if angelica is present. Requires Angelica 2.1.3+.")
     @Config.DefaultBoolean(true)
     public static boolean fixAngelicaShaderCIPCompat;
+
+    @Config.Comment("""
+        Disable DAPI's custom BlockPlaceEvent, that is sent for every setBlock (and related), even during worldgen.
+        This event is barely used across Reika's mods, and while even those uses are not that expensive, just the sheer number of events fired during worldgen can cause significant (serverside) slowdown.
+
+        We replace this event with more performant handling for all usages, which are very unlikely to not cause issues, but if you encounter any issues with the following features,
+        and would like to pay the performance cost of the event, you can disable is here.
+
+        - RotaryCraft EMP effect reset on blocks
+        - RotaryCraft Hydrokinetics stream invalidation with the Streams Mod
+        - World Gen Changes:
+            - Thaumcraft: Totem generation in Pink Birch Forest and Rainbow Forest biomes (should be disabled)
+            - Tinkers Construct: Slime Island generation in Glowing Cliffs and Pink Birch Forest biomes (should be disabled)
+            - Thaumcraft: Boosted / changed node generation in CC's & SF's biomes
+            - Modified Spawners in Glowing Cliffs (wisps) and Rainbow Forest biomes (slowed)
+            - No Chisel Generation in the Glowing Cliffs
+            - Obsidian in the Pink Birch Forest biome above y 100 (no idea why this is a thing)
+            - Data Nodes being damaged when generated in the Rainbow Forest
+
+        -
+        """)
+    @Config.DefaultBoolean(true)
+    public static boolean replaceDefaultBlockPlaceEvent;
 }
