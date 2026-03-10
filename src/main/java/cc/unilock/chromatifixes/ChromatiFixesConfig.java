@@ -86,8 +86,22 @@ public class ChromatiFixesConfig {
             - Obsidian in the Pink Birch Forest biome above y 100 (no idea why this is a thing)
             - Data Nodes being damaged when generated in the Rainbow Forest
 
-        -
+        - Crystal Network Link Obstructions
+        - Lumen Broadcaster 80% no-obstruction requirements
         """)
     @Config.DefaultBoolean(true)
     public static boolean replaceDefaultBlockPlaceEvent;
+
+    @Config.Comment("If you aren't happy with the worldgen in some way, and can accept it being slower, disable it here. Feel free to open an issue, if you notice any different worldgen.")
+    @Config.DefaultBoolean(true)
+    public static boolean optimizeWorldGen;
+
+    @Config.Comment("The default DAPI leaf decay handling is very expensive, so we add some caching for it. If you don't like leafs decaying as fast as without, disable it here.")
+    @Config.DefaultBoolean(true)
+    public static boolean cacheLeafDecayBFS;
+
+    @Config.Comment("Changes the duration (in millis) to check if we are connected to the internet at startup. DragonAPI checks 6 remote sources, so this value is multiplied by 6 internally.")
+    @Config.DefaultInt(1000)
+    @Config.RangeInt(min = 100, max = 20000)
+    public static int internetConnectivityTimeoutDuration;
 }

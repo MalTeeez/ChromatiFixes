@@ -68,22 +68,27 @@ public class LateMixinLoader implements ILateMixinLoader {
             mixins.add("chromaticraft.TileEntityLumenAlvearyTemperatureMatchingEffectMixin");
             mixins.add("chromaticraft.TileEntityPlayerDelegateMixin");
             mixins.add("chromaticraft.TileEntityWirelessPoweredMixin");
+
             if (ChromatiFixesConfig.enableShiftMazeBypassCrashFix) {
                 mixins.add("chromaticraft.ShiftMazeGeneratorMixin");
             }
+
             if (wailaplugins && ChromatiFixesConfig.disableWailaFluidTooltips) {
                 mixins.add("chromaticraft.wailatank.BlockChromaTileMixin");
                 mixins.add("chromaticraft.wailatank.TileEntityCrystalTankMixin");
                 mixins.add("chromaticraft.wailatank.BlockCrystalTankMixin");
             }
+
             mixins.add("chromaticraft.BlockDecoFlowerMixin");
 
             mixins.add("chromaticraft.biomeeffects.BiomeFXRendererMixin");
             mixins.add("chromaticraft.biomeeffects.CliffFogRendererCloudMixin");
 
-            mixins.add("chromaticraft.worldgen.EndOverhaulManagerMixin");
-            mixins.add("chromaticraft.worldgen.EndTendrilMixin");
-            mixins.add("chromaticraft.worldgen.GlowingCliffsColumnShaperMixin");
+            if (ChromatiFixesConfig.optimizeWorldGen) {
+                mixins.add("chromaticraft.worldgen.EndOverhaulManagerMixin");
+                mixins.add("chromaticraft.worldgen.EndTendrilMixin");
+                mixins.add("chromaticraft.worldgen.GlowingCliffsColumnShaperMixin");
+            }
 
             if (angelica && ChromatiFixesConfig.fixAngelicaShaderCIPCompat) {
                 mixins.add("chromaticraft.client.EnderCrystalRendererMixin");
@@ -102,6 +107,10 @@ public class LateMixinLoader implements ILateMixinLoader {
                 }
 
             }
+
+            if (ChromatiFixesConfig.forceUseCachedEDDBTrades) {
+                mixins.add("chromaticraft.UATradesMixin");
+            }
         }
         if (dragonapi) {
             mixins.add("dragonapi.AbstractSearchFoundPathMixin");
@@ -111,11 +120,27 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (ChromatiFixesConfig.allowHigherIDSpace) {
                 mixins.add("dragonapi.IDTypeMixin");
             }
+
+            mixins.add("dragonapi.ReikaFileReaderMixin");
+
+            if (ChromatiFixesConfig.optimizeWorldGen && chisel) {
+                mixins.add("dragonapi.chisel.GeneratorChiselMixin");
+            }
+
+            if (ChromatiFixesConfig.cacheLeafDecayBFS) {
+                mixins.add("dragonapi.BlockCustomLeafMixin");
+            }
         }
         if (geostrata) {
-            mixins.add("geostrata.worldgen.ArcticSpiresGeneratorArcticSpireMixin");
-            mixins.add("geostrata.worldgen.WorldGenGeoRockMixin");
-            mixins.add("geostrata.worldgen.LavaRockGeneratorRedesignMixin");
+            if (ChromatiFixesConfig.optimizeWorldGen) {
+                mixins.add("geostrata.worldgen.ArcticSpiresGeneratorArcticSpireMixin");
+                mixins.add("geostrata.worldgen.WorldGenGeoRockMixin");
+                mixins.add("geostrata.worldgen.LavaRockGeneratorRedesignMixin");
+                mixins.add("geostrata.worldgen.CreepvineGeneratorMixin");
+                mixins.add("geostrata.worldgen.DecoGenerator$DecorationsMixin");
+                mixins.add("geostrata.worldgen.DecoGenerator$DecorationsAccessor");
+                mixins.add("geostrata.worldgen.CreepvineGeneratorMixin");
+            }
         }
         if (satisforestry) {
             mixins.add("satisforestry.SFEventsMixin");
