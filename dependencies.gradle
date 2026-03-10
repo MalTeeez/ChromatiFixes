@@ -58,8 +58,8 @@ dependencies {
 
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:spark:v0.0.15-pre:fat-dev")
 
-    //runtimeOnlyNonPublishable("com.github.GTNewHorizons:Angelica:2.1.1:dev") { transitive = false }
-    runtimeOnlyNonPublishable(files("libs/angelica-2.1.1-master.10+cb5e2ed7d4-dirty-dev.jar"))
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Angelica:2.1.1:dev") { transitive = false }
+    //runtimeOnlyNonPublishable(files("libs/angelica-2.1.1-master.10+cb5e2ed7d4-dirty-dev.jar"))
 
     compileOnly(rfg.deobf("curse.maven:thaumcraft-223628:2227552"))
 

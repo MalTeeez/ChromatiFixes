@@ -98,7 +98,7 @@ public class ChromatiFixesConfig {
 
     @Config.Comment("The default DAPI leaf decay handling is very expensive, so we add some caching for it. If you don't like leafs decaying as fast as without, disable it here.")
     @Config.DefaultBoolean(true)
-    public static boolean cacheLeafDecayBFS;
+    public static boolean cacheLeafDecays;
 
     @Config.Comment("Changes the duration (in millis) to check if we are connected to the internet at startup. DragonAPI checks 6 remote sources, so this value is multiplied by 6 internally.")
     @Config.DefaultInt(1000)

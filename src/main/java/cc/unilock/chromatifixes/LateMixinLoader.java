@@ -127,7 +127,7 @@ public class LateMixinLoader implements ILateMixinLoader {
                 mixins.add("dragonapi.chisel.GeneratorChiselMixin");
             }
 
-            if (ChromatiFixesConfig.cacheLeafDecayBFS) {
+            if (ChromatiFixesConfig.cacheLeafDecays) {
                 mixins.add("dragonapi.BlockCustomLeafMixin");
             }
         }
