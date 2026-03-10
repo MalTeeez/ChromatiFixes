@@ -4,7 +4,6 @@ import Reika.DragonAPI.Auxiliary.WorldGenInterceptionRegistry;
 import Reika.GeoStrata.API.RockProofStone;
 import Reika.GeoStrata.Base.RockBlock;
 import Reika.GeoStrata.Registry.GeoOptions;
-import Reika.GeoStrata.World.WorldGenGeoRock;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -20,7 +19,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-@Mixin(value = WorldGenGeoRock.class, remap = false)
+@Mixin(targets = "Reika.GeoStrata.World.WorldGenGeoRock")
 public abstract class WorldGenGeoRockMixin {
 
     @Final
