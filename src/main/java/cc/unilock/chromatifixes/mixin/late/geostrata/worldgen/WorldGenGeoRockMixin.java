@@ -8,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.NibbleArray;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -56,8 +55,6 @@ public abstract class WorldGenGeoRockMixin {
 
         final boolean overgen = GeoOptions.OVERGEN.getState();
         final Block overwriteBlock = this.overwrite;
-        final int overwriteBlockId = Block.getIdFromBlock(overwriteBlock);
-        final int overwriteBlockIdLSB = overwriteBlockId & 0xFF;
         final boolean overwriteIsRockProof = overwriteBlock instanceof RockProofStone;
         final boolean overwriteIsRockBlock = overwriteBlock instanceof RockBlock;
 
@@ -80,10 +77,6 @@ public abstract class WorldGenGeoRockMixin {
             int cachedChunkX = Integer.MIN_VALUE;
             int cachedChunkZ = Integer.MIN_VALUE;
             ExtendedBlockStorage[] cachedSections = null;
-
-            // These are refreshed whenever the chunk or section changes
-            byte[] lsbArray = null;
-            NibbleArray msbArray = null;
             ExtendedBlockStorage cachedSection = null;
             int cachedSectionIndex = Integer.MIN_VALUE;
 
@@ -138,45 +131,27 @@ public abstract class WorldGenGeoRockMixin {
                                 cachedSectionIndex = Integer.MIN_VALUE;
                             }
 
-                            // Refresh section and its raw arrays only when dy band changes
-                            // or when the chunk just changed above
+                            // Refresh section only when dy band changes or chunk changed above
                             if (sectionIndex != cachedSectionIndex) {
                                 cachedSectionIndex = sectionIndex;
-                                if (sectionIndex < 0 || sectionIndex >= cachedSections.length) {
-                                    cachedSection = null;
-                                    lsbArray = null;
-                                    msbArray = null;
-                                } else {
-                                    cachedSection = cachedSections[sectionIndex];
-                                    if (cachedSection == null) {
-                                        lsbArray = null;
-                                        msbArray = null;
-                                    } else {
-                                        lsbArray = cachedSection.getBlockLSBArray();
-                                        msbArray = cachedSection.getBlockMSBArray();
-                                    }
-                                }
+                                cachedSection = (sectionIndex >= 0 && sectionIndex < cachedSections.length)
+                                    ? cachedSections[sectionIndex]
+                                    : null;
                             }
 
-                            if (lsbArray == null) continue;
+                            // Null section means all air — nothing to replace
+                            if (cachedSection == null) continue;
 
                             int localZ = dz & 15;
-                            int index = localY << 8 | localZ << 4 | localX;
 
-                            // LSB fast-reject — avoids MSB read for the vast majority of blocks
-                            int blockIdLSB = lsbArray[index] & 0xFF;
-                            if (blockIdLSB != overwriteBlockIdLSB) continue;
-
-                            // LSB matched — now check full ID including MSB if present
-                            int blockId = blockIdLSB;
-                            if (msbArray != null) {
-                                blockId |= msbArray.get(localX, localY, localZ) << 8;
-                            }
-                            if (blockId != overwriteBlockId) continue;
+                            // Use EndlessIDs-safe accessor on the cached section directly,
+                            // still avoiding the world-level chunk hashmap lookup
+                            Block b = cachedSection.getBlockByExtId(localX, localY, localZ);
+                            if (b != overwriteBlock) continue;
 
                             // RockProofStone check — nearly always false, branch predicts well
                             if (overwriteIsRockProof
-                                && ((RockProofStone) overwriteBlock).blockRockGeneration(world, dx, dy, dz, overwriteBlock, world.getBlockMetadata(dx, dy, dz))) {
+                                && ((RockProofStone) overwriteBlock).blockRockGeneration(world, dx, dy, dz, overwriteBlock, cachedSection.getExtBlockMetadata(localX, localY, localZ))) {
                                 continue;
                             }
 
