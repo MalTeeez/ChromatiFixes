@@ -1,5 +1,6 @@
 package cc.unilock.chromatifixes.mixin.late.geostrata.worldgen;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;

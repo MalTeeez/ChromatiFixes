@@ -4,21 +4,25 @@ import Reika.DragonAPI.Auxiliary.WorldGenInterceptionRegistry;
 import Reika.GeoStrata.API.RockProofStone;
 import Reika.GeoStrata.Base.RockBlock;
 import Reika.GeoStrata.Registry.GeoOptions;
+import Reika.GeoStrata.World.WorldGenGeoRock;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-@Mixin(targets = "Reika.GeoStrata.World.WorldGenGeoRock")
+@Mixin(value = WorldGenGeoRock.class, remap = false)
 public abstract class WorldGenGeoRockMixin {
 
     @Final
@@ -35,8 +39,14 @@ public abstract class WorldGenGeoRockMixin {
      * @reason The original is very unlikely to be changed, and this makes it a lot more efficient than multiple wrap operations.
      * Also cache the sin envelope value that was being recomputed multiple times per iteration, and use flag 0 instead of 2 when setting blocks.
      */
-    @Overwrite
-    public boolean generate(World world, Random rand, int x, int y, int z) {
+    @Dynamic
+    @Inject(
+        method = "func_76484_a",
+        at = @At("HEAD"),
+        cancellable = true,
+        require = 1
+    )
+    public void generateGeoStrataRock$chromatifixes(World world, Random rand, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
         int count = 0;
         float f = rand.nextFloat() * (float) Math.PI;
 
@@ -61,7 +71,7 @@ public abstract class WorldGenGeoRockMixin {
         // If !overgen and the overwrite target is a RockBlock, nothing will ever
         // pass canGenerateIn — bail out immediately.
         if (!overgen && overwriteIsRockBlock) {
-            return false;
+            cir.setReturnValue(false);
         }
 
         // Track modified chunks so setChunkModified() is called once per chunk,
@@ -174,6 +184,6 @@ public abstract class WorldGenGeoRockMixin {
             chunk.setChunkModified();
         }
 
-        return count > 0;
+        cir.setReturnValue(count > 0);
     }
 }

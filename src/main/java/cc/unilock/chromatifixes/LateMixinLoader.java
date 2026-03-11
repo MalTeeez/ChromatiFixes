@@ -88,6 +88,8 @@ public class LateMixinLoader implements ILateMixinLoader {
                 mixins.add("chromaticraft.worldgen.EndOverhaulManagerMixin");
                 mixins.add("chromaticraft.worldgen.EndTendrilMixin");
                 mixins.add("chromaticraft.worldgen.GlowingCliffsColumnShaperMixin");
+                mixins.add("chromaticraft.worldgen.BiomeGlowingCliffsMixin");
+                mixins.add("chromaticraft.worldgen.CrystalGeneratorMixin");
             }
 
             if (angelica && ChromatiFixesConfig.fixAngelicaShaderCIPCompat) {
@@ -130,10 +132,16 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (ChromatiFixesConfig.cacheLeafDecays) {
                 mixins.add("dragonapi.BlockCustomLeafMixin");
             }
+
+            if (ChromatiFixesConfig.optimizeWorldGen) {
+                // Debugging for a broken worldgen scenario
+                mixins.add("dragonapi.ReikaWorldHelperMixin");
+            }
         }
         if (geostrata) {
             if (ChromatiFixesConfig.optimizeWorldGen) {
                 mixins.add("geostrata.worldgen.ArcticSpiresGeneratorArcticSpireMixin");
+                mixins.add("geostrata.worldgen.ArcticSpiresGeneratorMixin");
                 mixins.add("geostrata.worldgen.WorldGenGeoRockMixin");
                 mixins.add("geostrata.worldgen.LavaRockGeneratorRedesignMixin");
                 mixins.add("geostrata.worldgen.CreepvineGeneratorMixin");
