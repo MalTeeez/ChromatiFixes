@@ -96,9 +96,17 @@ public class ChromatiFixesConfig {
     @Config.DefaultBoolean(true)
     public static boolean optimizeWorldGen;
 
-    @Config.Comment("The default DAPI leaf decay handling is very expensive, so we add some caching for it. If you don't like leafs decaying as fast as without, disable it here.")
+    @Config.Comment("""
+        Some default BlockTicking events for Reika's mods are very expensive, and are therefore optimized.
+
+        Currently that only entrails changes to:
+        - Leaf decay of custom leafs based on DAPI
+        - Snow melting in Satisforestry's biome
+
+        If you notice any changes, and would like to have the original behavior with the performance cost, you can disable this here.
+        """)
     @Config.DefaultBoolean(true)
-    public static boolean cacheLeafDecays;
+    public static boolean cacheExpensiveBlockTicking;
 
     @Config.Comment("Changes the duration (in millis) to check if we are connected to the internet at startup. DragonAPI checks 6 remote sources, so this value is multiplied by 6 internally.")
     @Config.DefaultInt(1000)

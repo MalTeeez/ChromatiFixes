@@ -129,7 +129,7 @@ public class LateMixinLoader implements ILateMixinLoader {
                 mixins.add("dragonapi.chisel.GeneratorChiselMixin");
             }
 
-            if (ChromatiFixesConfig.cacheLeafDecays) {
+            if (ChromatiFixesConfig.cacheExpensiveBlockTicking) {
                 mixins.add("dragonapi.BlockCustomLeafMixin");
             }
 
@@ -164,6 +164,10 @@ public class LateMixinLoader implements ILateMixinLoader {
                         mixins.add("perfblockplace.tinkersconstruct.SlimeIslandGenMixin");
                     }
                 }
+            }
+
+            if (ChromatiFixesConfig.cacheExpensiveBlockTicking) {
+                mixins.add("satisforestry.SFEvents_TickingMixin");
             }
         }
         if (rotarycraft) {
