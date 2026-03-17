@@ -88,8 +88,9 @@ public class LateMixinLoader implements ILateMixinLoader {
                 mixins.add("chromaticraft.worldgen.EndOverhaulManagerMixin");
                 mixins.add("chromaticraft.worldgen.EndTendrilMixin");
                 mixins.add("chromaticraft.worldgen.GlowingCliffsColumnShaperMixin");
-                mixins.add("chromaticraft.worldgen.BiomeGlowingCliffsMixin");
                 mixins.add("chromaticraft.worldgen.CrystalGeneratorMixin");
+                mixins.add("chromaticraft.worldgen.LumaGeneratorMixin");
+                mixins.add("chromaticraft.worldgen.GlowingCliffsAuxGeneratorMixin");
             }
 
             if (angelica && ChromatiFixesConfig.fixAngelicaShaderCIPCompat) {
