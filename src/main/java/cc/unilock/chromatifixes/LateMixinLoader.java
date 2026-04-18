@@ -69,6 +69,7 @@ public class LateMixinLoader implements ILateMixinLoader {
             mixins.add("chromaticraft.TileEntityPlayerDelegateMixin");
             mixins.add("chromaticraft.TileEntityWirelessPoweredMixin");
             mixins.add("chromaticraft.ChromaAuxMixin");
+            mixins.add("chromaticraft.NetherDioramaMixin");
 
             if (ChromatiFixesConfig.enableShiftMazeBypassCrashFix) {
                 mixins.add("chromaticraft.ShiftMazeGeneratorMixin");
