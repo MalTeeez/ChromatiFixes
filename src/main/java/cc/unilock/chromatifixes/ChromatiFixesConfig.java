@@ -108,6 +108,11 @@ public class ChromatiFixesConfig {
     @Config.DefaultBoolean(true)
     public static boolean cacheExpensiveBlockTicking;
 
+    @Config.Comment("Stops particles being drawn from the world origin on their first frame, or at NaN when a Crystal Pylon attacks its own block.")
+    @Config.DefaultBoolean(true)
+    @Config.RequiresMcRestart
+    public static boolean fixCCParticles;
+
     @Config.Comment("Changes the duration (in millis) to check if we are connected to the internet at startup. DragonAPI checks 6 remote sources, so this value is multiplied by 6 internally.")
     @Config.DefaultInt(1000)
     @Config.RangeInt(min = 100, max = 20000)

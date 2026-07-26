@@ -34,7 +34,7 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    api("com.github.GTNewHorizons:GTNHLib:0.9.37:dev") { transitive = false }
+    api("com.github.GTNewHorizons:GTNHLib:0.11.32:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:Hodgepodge:2.7.95") { transitive = false }
 
     devOnlyNonPublishable(rfg.deobf("curse.maven:dragonapi-235591:4722480"))
@@ -58,7 +58,7 @@ dependencies {
 
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:spark:v0.0.15-pre:fat-dev")
 
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Angelica:2.1.3:dev") { transitive = false }
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Angelica:2.1.56:dev") { transitive = false }
 
     compileOnly(rfg.deobf("curse.maven:thaumcraft-223628:2227552"))
 

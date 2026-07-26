@@ -4,6 +4,7 @@ import Reika.DragonAPI.Libraries.Java.ReikaJVMParser;
 import com.gtnewhorizon.gtnhlib.config.ConfigException;
 import com.gtnewhorizon.gtnhlib.config.ConfigurationManager;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
 import java.lang.reflect.Field;
@@ -58,7 +59,6 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
                 args.add("-DragonAPI_disable_ASM_SETBLOCK");
             }
 
-
             if (angelica) {
                 if (ChromatiFixesConfig.insideDevEnv || ChromatiFixesConfig.fixAngelicaCTMBlocksCompat) {
                     args.add("-DragonAPI_disable_ASM_GRASSSIDEICON");
@@ -100,6 +100,11 @@ public class EarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
+
+        if (ChromatiFixesConfig.fixCCParticles) {
+            mixins.add("particle.EntityFXMixin");
+        }
+
         return mixins;
     }
 

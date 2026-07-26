@@ -47,7 +47,12 @@ public class LateMixinLoader implements ILateMixinLoader {
                 mixins.add("chromaticraft.client.EnchantDecompHandlerMixin");
                 mixins.add("chromaticraft.client.FabricatorHandlerMixin");
                 mixins.add("chromaticraft.client.WarpPointDataMixin");
+
+                if (ChromatiFixesConfig.fixCCParticles) {
+                    mixins.add("chromaticraft.client.TileEntityCrystalPylonMixin");
+                }
             }
+
             if (dragonrealmcore) {
                 mixins.add("dragonrealmcore.client.DREventsMixin");
             }
