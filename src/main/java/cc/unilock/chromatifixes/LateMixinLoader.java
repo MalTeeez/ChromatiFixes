@@ -44,6 +44,7 @@ public class LateMixinLoader implements ILateMixinLoader {
                 mixins.add("chromaticraft.client.ChromaClientEventControllerMixin");
                 mixins.add("chromaticraft.client.ChromaDimensionManagerMixin");
                 mixins.add("chromaticraft.client.CrystalFurnaceHandlerMixin");
+                mixins.add("chromaticraft.client.CrystalGlowRendererMixin");
                 mixins.add("chromaticraft.client.EnchantDecompHandlerMixin");
                 mixins.add("chromaticraft.client.FabricatorHandlerMixin");
                 mixins.add("chromaticraft.client.WarpPointDataMixin");
@@ -68,7 +69,10 @@ public class LateMixinLoader implements ILateMixinLoader {
         if (chromaticraft) {
             mixins.add("chromaticraft.accessor.CrystalBlockAccessor");
             mixins.add("chromaticraft.accessor.TileEntityCrystalBroadcasterAccessor");
+            mixins.add("chromaticraft.ChromaBlocksMixin");
+            mixins.add("chromaticraft.CrystalTypeBlockMixin");
             mixins.add("chromaticraft.DungeonGeneratorMixin");
+            mixins.add("chromaticraft.ItemBlockCrystalGlowMixin");
             mixins.add("chromaticraft.ProgressionManagerMixin");
             mixins.add("chromaticraft.PylonFinderMixin");
             mixins.add("chromaticraft.PylonGeneratorMixin");
