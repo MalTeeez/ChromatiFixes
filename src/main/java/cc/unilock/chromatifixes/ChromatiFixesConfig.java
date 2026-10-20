@@ -119,7 +119,7 @@ public class ChromatiFixesConfig {
     public static int internetConnectivityTimeoutDuration;
 
     @Config.Comment("Makes the Chromatic Lexicon remember the open page when closed with Escape, not just via its save-and-exit button.")
-    @Config.DefaultBoolean(false)
+    @Config.DefaultBoolean(true)
     public static boolean alwaysRememberLexiconPage;
 
     @Config.Comment("""
@@ -137,7 +137,7 @@ public class ChromatiFixesConfig {
     public static boolean lexiconQoL;
 
     @Config.Comment("Fixes ReactorCraft Heat Pipes voiding/duplicating heat and resetting on chunk load, and re-enables their passive heat loss. Changes heat pipe balance.")
-    @Config.DefaultBoolean(false)
+    @Config.DefaultBoolean(true)
     @Config.RequiresMcRestart
     public static boolean fixReactorCraftHeatPipes;
 }

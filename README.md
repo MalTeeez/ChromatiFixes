@@ -21,7 +21,7 @@ Most credit goes to [gamrguy](https://github.com/gamrguy) a.k.a. "RobotLucca" a.
   - Allows Cave Crystals and Potion Crystals to work with the Player Imitation Core, even if the player isn't in the immediate vicinity (unilock)
   - Prevents crashes caused by Adjacency Cores on neighbor state updates (thegamemaster1234, unilock)
   - Prevents crashes caused by Crystal Glows and crystal blocks with out-of-range metadata (unilock)
-  - With `alwaysRememberLexiconPage` enabled, the Chromatic Lexicon remembers its page when closed with Escape (Ethan-Vann)
+  - With `alwaysRememberLexiconPage` enabled (default), the Chromatic Lexicon remembers its page when closed with Escape (Ethan-Vann)
   - With `lexiconQoL` enabled (default), adds quality of life changes to the Chromatic Lexicon
     - Opening the book no longer moves the cursor to a stale position, and the navigation map keeps its scroll position and zoom when reopened
     - The navigation and progress maps can be dragged with the mouse or scrolled with the wheel (shift for sideways), and ctrl + wheel zooms the navigation map
@@ -32,7 +32,7 @@ Most credit goes to [gamrguy](https://github.com/gamrguy) a.k.a. "RobotLucca" a.
 - ReactorCraft
   - Stops Coolant Cells from draining and voiding fluids other than water / heavy water (gamrguy)
   - Allows items to be extracted from the Isotope Centrifuge on every side, not just the fluid input and power faces (gamrguy)
-  - With `fixReactorCraftHeatPipes` enabled, Heat Pipes no longer void or duplicate heat, keep their heat across chunk reloads, and passively cool down (gamrguy)
+  - With `fixReactorCraftHeatPipes` enabled (default), Heat Pipes no longer void or duplicate heat, keep their heat across chunk reloads, and passively cool down (gamrguy)
 - Satisforestry
   - Prevents a ClassCastException when removing a Slug item from slot 39 of any non-player inventory (unilock)
   - Allow Pressurizer multiblock to receive RotaryCraft power via Power Hub (thegamemaster1234)
