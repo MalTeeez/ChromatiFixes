@@ -199,6 +199,11 @@ public class LateMixinLoader implements ILateMixinLoader {
         }
         if (reactorcraft) {
             mixins.add("reactorcraft.EntityTrackerEntryMixin");
+            mixins.add("reactorcraft.TileEntityCentrifugeMixin");
+            mixins.add("reactorcraft.TileEntityWaterCellMixin");
+            if (ChromatiFixesConfig.fixReactorCraftHeatPipes) {
+                mixins.add("reactorcraft.TileEntityHeatPipeMixin");
+            }
             if (wailaplugins && ChromatiFixesConfig.disableWailaFluidTooltips) {
                 mixins.add("reactorcraft.BlockReactorTileMixin");
             }

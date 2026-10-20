@@ -25,6 +25,10 @@ Most credit goes to [gamrguy](https://github.com/gamrguy) a.k.a. "RobotLucca" a.
 - DragonAPI
   - Prevents NullPointerExceptions caused by `AbstractSearch$FoundPath#getPath`, preventing ChromatiCraft's Bezier Crystals from causing an Internal Server Error
   - With `disableClientSpecificConfigs` enabled, all "client-specific" configs use the same keys across all systems, allowing them to be packaged with modpacks and such (unilock)
+- ReactorCraft
+  - Stops Coolant Cells from draining and voiding fluids other than water / heavy water (gamrguy)
+  - Allows items to be extracted from the Isotope Centrifuge on every side, not just the fluid input and power faces (gamrguy)
+  - With `fixReactorCraftHeatPipes` enabled, Heat Pipes no longer void or duplicate heat, keep their heat across chunk reloads, and passively cool down (gamrguy)
 - Satisforestry
   - Prevents a ClassCastException when removing a Slug item from slot 39 of any non-player inventory (unilock)
   - Allow Pressurizer multiblock to receive RotaryCraft power via Power Hub (thegamemaster1234)

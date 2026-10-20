@@ -122,4 +122,9 @@ public class ChromatiFixesConfig {
     @Config.DefaultBoolean(false)
     @Config.RequiresMcRestart
     public static boolean alwaysRememberLexiconPage;
+
+    @Config.Comment("Fixes ReactorCraft Heat Pipes voiding/duplicating heat and resetting on chunk load, and re-enables their passive heat loss. Changes heat pipe balance.")
+    @Config.DefaultBoolean(false)
+    @Config.RequiresMcRestart
+    public static boolean fixReactorCraftHeatPipes;
 }
