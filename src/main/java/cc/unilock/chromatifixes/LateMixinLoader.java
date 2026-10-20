@@ -51,6 +51,10 @@ public class LateMixinLoader implements ILateMixinLoader {
                 if (ChromatiFixesConfig.fixCCParticles) {
                     mixins.add("chromaticraft.client.TileEntityCrystalPylonMixin");
                 }
+
+                if (ChromatiFixesConfig.alwaysRememberLexiconPage) {
+                    mixins.add("chromaticraft.client.ChromaBookGuiMixin");
+                }
             }
 
             if (dragonrealmcore) {

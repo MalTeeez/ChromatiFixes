@@ -117,4 +117,9 @@ public class ChromatiFixesConfig {
     @Config.DefaultInt(1000)
     @Config.RangeInt(min = 100, max = 20000)
     public static int internetConnectivityTimeoutDuration;
+
+    @Config.Comment("Makes the Chromatic Lexicon remember the open page when closed with Escape, not just via its save-and-exit button.")
+    @Config.DefaultBoolean(false)
+    @Config.RequiresMcRestart
+    public static boolean alwaysRememberLexiconPage;
 }

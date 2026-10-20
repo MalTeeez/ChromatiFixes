@@ -20,6 +20,7 @@ Most credit goes to [gamrguy](https://github.com/gamrguy) a.k.a. "RobotLucca" a.
   - Enable Lumen Alveary Humidity and Temperature controls when the Princess is unable to work (as these are designed to allow the Princess to work in the first place) (thegamemaster1234)
   - Allows Cave Crystals and Potion Crystals to work with the Player Imitation Core, even if the player isn't in the immediate vicinity (unilock)
   - Prevents crashes caused by Adjacency Cores on neighbor state updates (thegamemaster1234, unilock)
+  - With `alwaysRememberLexiconPage` enabled, the Chromatic Lexicon remembers its page when closed with Escape (Ethan-Vann)
 - DragonAPI
   - Prevents NullPointerExceptions caused by `AbstractSearch$FoundPath#getPath`, preventing ChromatiCraft's Bezier Crystals from causing an Internal Server Error
   - With `disableClientSpecificConfigs` enabled, all "client-specific" configs use the same keys across all systems, allowing them to be packaged with modpacks and such (unilock)
