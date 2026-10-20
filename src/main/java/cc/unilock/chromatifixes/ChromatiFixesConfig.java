@@ -120,8 +120,21 @@ public class ChromatiFixesConfig {
 
     @Config.Comment("Makes the Chromatic Lexicon remember the open page when closed with Escape, not just via its save-and-exit button.")
     @Config.DefaultBoolean(false)
-    @Config.RequiresMcRestart
     public static boolean alwaysRememberLexiconPage;
+
+    @Config.Comment("""
+        Quality of life changes for the Chromatic Lexicon
+
+        - Opening the book no longer moves the cursor to a stale position
+        - The navigation map keeps its scroll position and zoom when the book is reopened
+        - The navigation and progress maps can be dragged with the left mouse button or scrolled with the mouse wheel, hold shift to scroll sideways
+        - Holding ctrl while using the mouse wheel zooms the navigation map in and out, to reach lower sections faster
+        - On pages with subpages, the mouse wheel and the left and right arrow keys flip between them
+        - The mouse back button acts like the X button of a page
+        """)
+    @Config.DefaultBoolean(true)
+    @Config.RequiresMcRestart
+    public static boolean lexiconQoL;
 
     @Config.Comment("Fixes ReactorCraft Heat Pipes voiding/duplicating heat and resetting on chunk load, and re-enables their passive heat loss. Changes heat pipe balance.")
     @Config.DefaultBoolean(false)

@@ -22,6 +22,10 @@ Most credit goes to [gamrguy](https://github.com/gamrguy) a.k.a. "RobotLucca" a.
   - Prevents crashes caused by Adjacency Cores on neighbor state updates (thegamemaster1234, unilock)
   - Prevents crashes caused by Crystal Glows and crystal blocks with out-of-range metadata (unilock)
   - With `alwaysRememberLexiconPage` enabled, the Chromatic Lexicon remembers its page when closed with Escape (Ethan-Vann)
+  - With `lexiconQoL` enabled (default), adds quality of life changes to the Chromatic Lexicon
+    - Opening the book no longer moves the cursor to a stale position, and the navigation map keeps its scroll position and zoom when reopened
+    - The navigation and progress maps can be dragged with the mouse or scrolled with the wheel (shift for sideways), and ctrl + wheel zooms the navigation map
+    - On pages with subpages, the mouse wheel and arrow keys flip between them, and the mouse back button acts like the X button
 - DragonAPI
   - Prevents NullPointerExceptions caused by `AbstractSearch$FoundPath#getPath`, preventing ChromatiCraft's Bezier Crystals from causing an Internal Server Error
   - With `disableClientSpecificConfigs` enabled, all "client-specific" configs use the same keys across all systems, allowing them to be packaged with modpacks and such (unilock)

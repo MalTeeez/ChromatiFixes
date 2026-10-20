@@ -41,6 +41,7 @@ public class LateMixinLoader implements ILateMixinLoader {
             if (chromaticraft) {
                 mixins.add("chromaticraft.client.accessor.WarpPointAccessor");
                 mixins.add("chromaticraft.client.ArtefactSpawnerMixin");
+                mixins.add("chromaticraft.client.ChromaBookGuiMixin");
                 mixins.add("chromaticraft.client.ChromaClientEventControllerMixin");
                 mixins.add("chromaticraft.client.ChromaDimensionManagerMixin");
                 mixins.add("chromaticraft.client.CrystalFurnaceHandlerMixin");
@@ -53,8 +54,12 @@ public class LateMixinLoader implements ILateMixinLoader {
                     mixins.add("chromaticraft.client.TileEntityCrystalPylonMixin");
                 }
 
-                if (ChromatiFixesConfig.alwaysRememberLexiconPage) {
-                    mixins.add("chromaticraft.client.ChromaBookGuiMixin");
+                if (ChromatiFixesConfig.lexiconQoL) {
+                    mixins.add("chromaticraft.client.GuiBookSectionMixin");
+                    mixins.add("chromaticraft.client.GuiNavigationMixin");
+                    mixins.add("chromaticraft.client.GuiNavigationSectionCategoryMixin");
+                    mixins.add("chromaticraft.client.GuiScrollingPageMixin");
+                    mixins.add("chromaticraft.client.ItemChromaBookMixin");
                 }
             }
 
