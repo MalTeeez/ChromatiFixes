@@ -136,6 +136,11 @@ public class ChromatiFixesConfig {
     @Config.RequiresMcRestart
     public static boolean lexiconQoL;
 
+    @Config.Comment("Right clicking a Chromatic Lexicon page acts like its X button, going back to the navigation page. Not on structure pages, where right click resets the 3D view.")
+    @Config.DefaultBoolean(false)
+    @Config.RequiresMcRestart
+    public static boolean rightClickLexiconBack;
+
     @Config.Comment("Fixes ReactorCraft Heat Pipes voiding/duplicating heat and resetting on chunk load, and re-enables their passive heat loss. Changes heat pipe balance.")
     @Config.DefaultBoolean(true)
     @Config.RequiresMcRestart

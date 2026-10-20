@@ -2,7 +2,9 @@ package cc.unilock.chromatifixes.mixin.late.chromaticraft.client;
 
 import Reika.ChromatiCraft.Base.ChromaBookGui;
 import Reika.ChromatiCraft.Base.GuiBookSection;
+import Reika.ChromatiCraft.GUI.Book.GuiStructure;
 import Reika.ChromatiCraft.Registry.ChromaGuis;
+import cc.unilock.chromatifixes.ChromatiFixesConfig;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.input.Keyboard;
@@ -11,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
-// Mouse wheel / arrow keys flip subpages, mouse back button returns to the navigation page.
+// Mouse wheel / arrow keys flip subpages, mouse back button (and optionally right click) acts as the X button.
 // Goes through the existing buttons, so their sounds and NEI-opened page handling still apply.
 @Mixin(GuiBookSection.class)
 public abstract class GuiBookSectionMixin extends ChromaBookGui {
@@ -32,9 +34,20 @@ public abstract class GuiBookSectionMixin extends ChromaBookGui {
     public void handleMouseInput() {
         super.handleMouseInput();
         int wheel = Mouse.getEventDWheel();
-        if (wheel != 0) {
-            chromatifixes$press(wheel < 0 ? NEXT : PREV);
-        } else if (Mouse.getEventButtonState() && Mouse.getEventButton() == 3) {
+        boolean pressed = Mouse.getEventButtonState();
+        int button = Mouse.getEventButton();
+        if (ChromatiFixesConfig.lexiconQoL) {
+            if (wheel != 0) {
+                chromatifixes$press(wheel < 0 ? NEXT : PREV);
+                return;
+            }
+            if (pressed && button == 3) {
+                chromatifixes$press(BACK);
+                return;
+            }
+        }
+        // The structure page already uses right click to reset its 3D view rotation
+        if (ChromatiFixesConfig.rightClickLexiconBack && pressed && button == 1 && !((Object) this instanceof GuiStructure)) {
             chromatifixes$press(BACK);
         }
     }
@@ -42,6 +55,9 @@ public abstract class GuiBookSectionMixin extends ChromaBookGui {
     @Override
     protected void keyTyped(char typedChar, int keyCode) {
         super.keyTyped(typedChar, keyCode);
+        if (!ChromatiFixesConfig.lexiconQoL) {
+            return;
+        }
         if (keyCode == Keyboard.KEY_RIGHT) {
             chromatifixes$press(NEXT);
         } else if (keyCode == Keyboard.KEY_LEFT) {

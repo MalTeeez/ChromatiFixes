@@ -54,8 +54,12 @@ public class LateMixinLoader implements ILateMixinLoader {
                     mixins.add("chromaticraft.client.TileEntityCrystalPylonMixin");
                 }
 
-                if (ChromatiFixesConfig.lexiconQoL) {
+                // Carries both the QoL subpage controls and right click back, each checked at runtime
+                if (ChromatiFixesConfig.lexiconQoL || ChromatiFixesConfig.rightClickLexiconBack) {
                     mixins.add("chromaticraft.client.GuiBookSectionMixin");
+                }
+
+                if (ChromatiFixesConfig.lexiconQoL) {
                     mixins.add("chromaticraft.client.GuiNavigationMixin");
                     mixins.add("chromaticraft.client.GuiNavigationSectionCategoryMixin");
                     mixins.add("chromaticraft.client.GuiScrollingPageMixin");
