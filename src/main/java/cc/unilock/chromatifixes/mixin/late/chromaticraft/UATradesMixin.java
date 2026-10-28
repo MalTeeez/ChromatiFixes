@@ -5,15 +5,12 @@ import cc.unilock.chromatifixes.ChromatiFixes;
 import com.google.gson.JsonElement;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -21,7 +18,7 @@ import java.io.InputStreamReader;
 public class UATradesMixin {
 
     @Unique
-    private static final ResourceLocation chromatiFixes$jsonPath = new ResourceLocation(ChromatiFixes.MOD_ID, "commodities.json");
+    private static final String chromatiFixes$jsonPath = "/assets/" + ChromatiFixes.MOD_ID + "/commodities.json";
 
     @WrapOperation(
         method = "loadData",
@@ -36,12 +33,8 @@ public class UATradesMixin {
         at = @At(value = "INVOKE", target = "Ljava/io/File;exists()Z")
     )
     public boolean forceUseCachedFileExists$chromatifixes(File instance, Operation<Boolean> original) {
-        try {
-            Minecraft.getMinecraft().getResourceManager().getResource(chromatiFixes$jsonPath);
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
+        // Read from the classpath, the client-only ResourceManager does not exist on a dedicated server
+        return ChromatiFixes.class.getResource(chromatiFixes$jsonPath) != null;
     }
 
     @Redirect(
@@ -50,7 +43,7 @@ public class UATradesMixin {
     )
     public JsonElement forceUseCachedFile$chromatifixes(File instance) {
         try (
-            InputStream is = Minecraft.getMinecraft().getResourceManager().getResource(chromatiFixes$jsonPath).getInputStream();
+            InputStream is = ChromatiFixes.class.getResourceAsStream(chromatiFixes$jsonPath);
             InputStreamReader reader = new InputStreamReader(is, java.nio.charset.StandardCharsets.UTF_8)
         ) {
             return new com.google.gson.JsonParser().parse(reader);
