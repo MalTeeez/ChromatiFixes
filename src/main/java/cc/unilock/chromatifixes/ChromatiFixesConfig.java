@@ -8,6 +8,11 @@ public class ChromatiFixesConfig {
     @Config.DefaultBoolean(false)
     public static boolean disableArtefactShader;
 
+    @Config.Comment("How many blocks above their chunk's heightmap the player must be for the Artefact shader to stop rendering. Set to 0 to disable this check. Uses the chunk heightmap, so it is a single array lookup per tick.")
+    @Config.DefaultInt(32)
+    @Config.RangeInt(min = 0, max = 255)
+    public static int artefactShaderMaxHeightAboveSurface;
+
     @Config.Comment("Disables the \"heat\" shader in the Nether from DragonRealmCore")
     @Config.DefaultBoolean(false)
     public static boolean disableNetherShader;

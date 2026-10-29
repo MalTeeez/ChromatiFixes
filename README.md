@@ -10,6 +10,7 @@ Most credit goes to [gamrguy](https://github.com/gamrguy) a.k.a. "RobotLucca" a.
   - Prevents `CaveLoader#getEffectiveBiome` from ever returning a null biome, fixing crashes usually caused by pylon chunk loading (thegamemaster1234)
 - ChromatiCraft
   - With `disableArtefactShader` enabled, disables the Artefact shader (unilock)
+  - Prevents the Artefact shader from activating while more than `artefactShaderMaxHeightAboveSurface` blocks (default 32, 0 disables) above the player's chunk heightmap (unilock)
   - Prevents crashes in `ChromaClientEventController#updateGlowCliffRendering` (thegamemaster1234)
   - Fixes the loadTransferRects method in a few NEI handlers, making them able to load with GTNH!NEI (FlamingKetchup)
   - Adds support for Xaero's maps where appropriate (unilock)
